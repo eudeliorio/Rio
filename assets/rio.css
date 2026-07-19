@@ -126,6 +126,10 @@ img { max-width: 100%; }
   opacity: 0; transform: translateY(-6px); pointer-events: none;
   transition: opacity .18s ease, transform .18s ease;
 }
+.dd-menu::before {
+  /* invisible bridge across the 14px gap so hover isn't lost between button and menu */
+  content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px;
+}
 .dd.open .dd-menu { opacity: 1; transform: translateY(0); pointer-events: auto; }
 .dd-item { display: flex; gap: 12px; padding: 12px 14px; border-radius: 10px; align-items: flex-start; }
 .dd-item:hover { background: var(--surface-2); }
