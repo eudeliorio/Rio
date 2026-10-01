@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Blog — Rio</title>
+<meta name="description" content="Research and field notes from Rio on FX execution, liquidity, settlement and the payment rails that move money across Latin America." />
+<link rel="icon" href="assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/rio.css?v=33" />
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="index.html"><img src="assets/rio-logo.png" alt="Rio" /></a>
+    <div class="nav-links">
+      <div class="dd">
+        <button type="button">Products <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="fx.html"><div><div class="t">FX &amp; Liquidity <span class="badge live">Live</span></div><div class="d">Stablecoins against LatAm currencies</div></div></a>
+          <a class="dd-item" href="payments.html"><div><div class="t">Cross-border Payments <span class="badge now">Beta</span></div><div class="d">Move money in and out of Latin America</div></div></a>
+          <a class="dd-item" href="accounts.html"><div><div class="t">Virtual Accounts <span class="badge now">Beta</span></div><div class="d">Stablecoin wallets &amp; USD accounts in beta, LatAm soon</div></div></a>
+        </div>
+      </div>
+      <a href="developers.html">Developers</a>
+      <a href="about.html">About</a>
+      <div class="dd">
+        <button type="button">Resources <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="blog.html"><div><div class="t">Blog</div><div class="d">Notes on FX, liquidity and rails in LatAm</div></div></a>
+          <a class="dd-item" href="contact.html"><div><div class="t">Contact</div><div class="d">Talk to the team about your flows</div></div></a>
+          <a class="dd-item" href="legal.html"><div><div class="t">Legal</div><div class="d">Terms, privacy and sanctions by jurisdiction</div></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-cta" href="https://app.rio.trade/en/login">Log In</a>
+  </div>
+</nav>
+
+<header class="page-hero" data-hero-anim="lattice">
+  <div class="container">
+    <div class="eyebrow rv"><span class="idx">RESOURCES</span> Blog</div>
+    <h1 class="rv d1">Notes on FX and the <span class="acc">rails</span> that move money across LatAm.</h1>
+    <p class="sub rv d2">What we see on the desk, written down. How prices are formed, where the hours go, what each rail can and cannot do, and what a treasury can measure for itself.</p>
+  </div>
+</header>
+
+<section class="container">
+  <div class="blog-layout">
+    <aside class="blog-side">
+      <div class="sticky">
+        <div class="group">
+          <h5>Language</h5>
+          <div class="lang-switch" role="group" aria-label="Language / Idioma">
+            <button type="button" data-lang="en" aria-pressed="true">EN</button>
+            <button type="button" data-lang="es" aria-pressed="false">ES</button>
+          </div>
+        </div>
+        <div class="group">
+          <h5>Series</h5>
+          <div class="chips">
+            <button class="chip" type="button" data-topic="all" aria-pressed="true">All posts</button>
+            <button class="chip" type="button" data-topic="mexico" aria-pressed="false">MXN corridor (4)</button>
+          </div>
+        </div>
+        <div class="group">
+          <h5>Topics</h5>
+          <div class="chips">
+            <button class="chip" type="button" data-topic="execution" aria-pressed="false">FX execution</button>
+            <button class="chip" type="button" data-topic="pricing" aria-pressed="false">Pricing & spreads</button>
+            <button class="chip" type="button" data-topic="liquidity" aria-pressed="false">Liquidity</button>
+            <button class="chip" type="button" data-topic="treasury" aria-pressed="false">Treasury</button>
+            <button class="chip" type="button" data-topic="rails" aria-pressed="false">Payment rails</button>
+            <button class="chip" type="button" data-topic="settlement" aria-pressed="false">Stablecoin settlement</button>
+            <button class="chip" type="button" data-topic="mexico" aria-pressed="false">Mexico</button>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <div class="blog-grid" id="posts">
+      <article class="post-card" data-lang="en" data-topics="execution settlement stablecoins mexico pricing">
+        <a class="tile" href="blog/anatomy-usdc-to-mxn-trade.html" aria-hidden="true" tabindex="-1"><img src="assets/blog/tile-routes.svg" alt="" loading="lazy" /></a>
+        <div class="meta"><time datetime="2026-10-01">Oct 1, 2026</time><span class="cat">Execution</span><span>8 min read</span></div>
+        <h3><a href="blog/anatomy-usdc-to-mxn-trade.html">Anatomy of a USD 10 million USDC to MXN trade: where the money goes at every step</a></h3>
+        <p>One order. Tuesday, 3:14pm, Mexico City. We follow it down a bank wire and down a stablecoin trade with Rio, minute by minute.</p>
+        <div class="foot"><a href="blog/es/anatomia-operacion-usdc-a-pesos.html" hreflang="es-MX">Leer en español →</a></div>
+      </article>
+      <article class="post-card" data-lang="en" data-topics="treasury pricing mexico">
+        <a class="tile" href="blog/real-cost-of-mxn-fx.html" aria-hidden="true" tabindex="-1"><img src="assets/blog/tile-gauge.svg" alt="" loading="lazy" /></a>
+        <div class="meta"><time datetime="2026-10-01">Oct 1, 2026</time><span class="cat">Treasury</span><span>7 min read</span></div>
+        <h3><a href="blog/real-cost-of-mxn-fx.html">The real cost of your MXN FX: three parts, the one no invoice shows, and when it pays to switch</a></h3>
+        <p>Most treasuries cannot say, to the basis point, what they pay for pesos. Here is how to find out in two weeks, and how to decide whether the number is worth changing.</p>
+        <div class="foot"><a href="blog/es/costo-real-fx-pesos-dolares.html" hreflang="es-MX">Leer en español →</a></div>
+      </article>
+      <article class="post-card" data-lang="en" data-topics="liquidity execution pricing mexico">
+        <a class="tile" href="blog/mxn-liquidity-by-the-hour.html" aria-hidden="true" tabindex="-1"><img src="assets/blog/tile-hours.svg" alt="" loading="lazy" /></a>
+        <div class="meta"><time datetime="2026-10-01">Oct 1, 2026</time><span class="cat">Liquidity</span><span>6 min read</span></div>
+        <h3><a href="blog/mxn-liquidity-by-the-hour.html">MXN liquidity by the hour: why Friday at 5pm costs more, and what a treasury can do about it</a></h3>
+        <p>You can trade the peso at any hour. You cannot trade it well at any hour. The gap between those two sentences is a cost most treasuries pay every week without seeing it.</p>
+        <div class="foot"><a href="blog/es/liquidez-del-peso-hora-por-hora.html" hreflang="es-MX">Leer en español →</a></div>
+      </article>
+      <article class="post-card" data-lang="en" data-topics="rails settlement stablecoins mexico">
+        <a class="tile" href="blog/spei-vs-spid-mexico-rails.html" aria-hidden="true" tabindex="-1"><img src="assets/blog/tile-rails.svg" alt="" loading="lazy" /></a>
+        <div class="meta"><time datetime="2026-10-01">Oct 1, 2026</time><span class="cat">Payment rails</span><span>7 min read</span></div>
+        <h3><a href="blog/spei-vs-spid-mexico-rails.html">SPEI vs SPID: how pesos and dollars actually move inside Mexico, and where stablecoins fit</a></h3>
+        <p>Mexico has one of the best instant-payment systems in the world for its own currency, and a much narrower one for dollars that most people outside Mexico have never heard of. What each does, what each cannot do, and how Rio plugs into both.</p>
+        <div class="foot"><a href="blog/es/spei-vs-spid-rieles-mexico.html" hreflang="es-MX">Leer en español →</a></div>
+      </article>
+      <article class="post-card" data-lang="es" data-topics="execution settlement stablecoins mexico pricing" hidden>
+        <a class="tile" href="blog/es/anatomia-operacion-usdc-a-pesos.html" aria-hidden="true" tabindex="-1"><img src="assets/blog/tile-routes.svg" alt="" loading="lazy" /></a>
+        <div class="meta"><time datetime="2026-10-01">1 oct 2026</time><span class="cat">Ejecución</span><span>9 min de lectura</span></div>
+        <h3><a href="blog/es/anatomia-operacion-usdc-a-pesos.html">Anatomía de una operación de USD 10 millones de USDC a pesos: a dónde va el dinero en cada paso</a></h3>
+        <p>Una orden. Martes, 3:14 de la tarde, Ciudad de México. La seguimos por una transferencia bancaria y por una operación con stablecoins en Rio, minuto a minuto.</p>
+        <div class="foot"><a href="blog/anatomy-usdc-to-mxn-trade.html" hreflang="en">Read in English →</a></div>
+      </article>
+      <article class="post-card" data-lang="es" data-topics="treasury pricing mexico" hidden>
+        <a class="tile" href="blog/es/costo-real-fx-pesos-dolares.html" aria-hidden="true" tabindex="-1"><img src="assets/blog/tile-gauge.svg" alt="" loading="lazy" /></a>
+        <div class="meta"><time datetime="2026-10-01">1 oct 2026</time><span class="cat">Tesorería</span><span>8 min de lectura</span></div>
+        <h3><a href="blog/es/costo-real-fx-pesos-dolares.html">El costo real de su FX en pesos: tres partes, la que ninguna factura muestra y cuándo conviene cambiar de proveedor</a></h3>
+        <p>La mayoría de las tesorerías no puede decir, al punto base, cuánto paga por sus pesos. Aquí va cómo averiguarlo en dos semanas, y cómo decidir si el número amerita un cambio.</p>
+        <div class="foot"><a href="blog/real-cost-of-mxn-fx.html" hreflang="en">Read in English →</a></div>
+      </article>
+      <article class="post-card" data-lang="es" data-topics="liquidity execution pricing mexico" hidden>
+        <a class="tile" href="blog/es/liquidez-del-peso-hora-por-hora.html" aria-hidden="true" tabindex="-1"><img src="assets/blog/tile-hours.svg" alt="" loading="lazy" /></a>
+        <div class="meta"><time datetime="2026-10-01">1 oct 2026</time><span class="cat">Liquidez</span><span>7 min de lectura</span></div>
+        <h3><a href="blog/es/liquidez-del-peso-hora-por-hora.html">Liquidez del peso hora por hora: por qué el viernes a las 5pm cuesta más, y qué puede hacer una tesorería al respecto</a></h3>
+        <p>Usted puede operar el peso a cualquier hora. No puede operarlo bien a cualquier hora. Entre esas dos frases hay un costo que la mayoría de las tesorerías paga cada semana sin verlo.</p>
+        <div class="foot"><a href="blog/mxn-liquidity-by-the-hour.html" hreflang="en">Read in English →</a></div>
+      </article>
+      <article class="post-card" data-lang="es" data-topics="rails settlement stablecoins mexico" hidden>
+        <a class="tile" href="blog/es/spei-vs-spid-rieles-mexico.html" aria-hidden="true" tabindex="-1"><img src="assets/blog/tile-rails.svg" alt="" loading="lazy" /></a>
+        <div class="meta"><time datetime="2026-10-01">1 oct 2026</time><span class="cat">Rieles de pago</span><span>8 min de lectura</span></div>
+        <h3><a href="blog/es/spei-vs-spid-rieles-mexico.html">SPEI vs SPID: cómo se mueven los pesos y los dólares dentro de México, y dónde entran las stablecoins</a></h3>
+        <p>México tiene uno de los mejores sistemas de pagos inmediatos del mundo para su propia moneda, y uno mucho más acotado para dólares del que casi nadie fuera de México ha oído hablar. Qué hace cada uno, qué no puede hacer, y cómo Rio se conecta con ambos.</p>
+        <div class="foot"><a href="blog/spei-vs-spid-mexico-rails.html" hreflang="en">Read in English →</a></div>
+      </article>
+      <div class="blog-empty" hidden>No posts on that topic yet. Clear the filter to see everything.</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-brand">
+        <div class="footer-logo"><img src="assets/rio-logo.png" alt="Rio" /></div>
+        <p>FX infrastructure for Latin America. Liquidity, payments, and accounts for fintechs and enterprises.</p>
+      </div>
+      <div class="f-col">
+        <h5>Product &amp; company</h5>
+        <div class="links">
+          <a href="developers.html">Developers</a>
+          <a href="about.html">About</a>
+          <a href="blog.html">Blog</a>
+          <a href="contact.html">Contact</a>
+          <a href="https://app.rio.trade/en/login">Log In</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Products</h5>
+        <div class="links">
+          <a href="fx.html">FX &amp; Liquidity</a>
+          <a href="payments.html">Cross-border Payments</a>
+          <a href="accounts.html">Virtual Accounts</a>
+        </div>
+      </div>
+      <div class="f-legal">
+        <h5>Legal</h5>
+        <div class="links row">
+          <a href="legal.html">Terms &amp; Conditions</a>
+          <a href="legal.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="f-base">
+        <span>© 2026 Rio</span>
+        <a href="mailto:hello@rio.trade">hello@rio.trade</a>
+        <span>FX infrastructure for Latin America</span>
+      </div>
+      <div class="f-disclaimer">
+        <div class="f-dcol">
+          <h5>Legal entities</h5>
+          <p>Rio is a brand of Rampa Holdings Limited and its group entities. Rio is a technology company, not a bank, and does not take deposits. Services are provided by the Rio group entity identified in your agreement: FX services in Mexico are provided by Rampa Blockchain, S.A.P.I. de C.V., which performs operations with virtual assets as a vulnerable activity under Article 17, Section XVI of the Mexican LFPIORPI; services in Peru are provided by Rampa Machu S.A.C.; payment services in Colombia are provided by Rampa Colombia S.A.S. (NIT 901.700.811-9); digital-asset trading for eligible international clients is provided by Rampa Labs Inc., a Money Services Business registered with FinCEN, acting as principal. Digital assets, including stablecoins, are not legal tender, are not backed or guaranteed by any government, and are not FDIC- or SIPC-insured. Cross-border Payments and Virtual Accounts have not launched and are subject to regulatory approvals. Nothing on this site is an offer to any person in a jurisdiction where such offer would be unlawful. See <a href="legal.html">Terms &amp; Conditions</a>.</p>
+        </div>
+        <div class="f-dcol">
+          <h5>Availability &amp; product status</h5>
+          <p><span class="mk">*</span> Live markets are available to eligible business clients onboarded by the relevant Rio group entity, subject to eligibility, onboarding and applicable law. Products and services are not available in all jurisdictions. <span class="mk">**</span> Beta refers to a pre-launch program: joining the beta waitlist does not open an account or create any right to receive services. Features are shown for illustration and remain subject to the licenses, registrations and regulatory approvals applicable in each jurisdiction. The regulated provider of each service will be identified at launch. USD accounts are expected to be provided by a regulated U.S. financial institution; stablecoin wallets are expected to be self-custodial &mdash; Rio will not hold your private keys. <span class="mk">&dagger;</span> Planned. Not currently offered. Launch in each jurisdiction is subject to applicable licenses, registrations and regulatory approvals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/rio.js?v=13"></script>
+<script>
+(function () {
+  var lang = 'en', topic = 'all';
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.post-card'));
+  var empty = document.querySelector('.blog-empty');
+  function apply() {
+    var shown = 0;
+    cards.forEach(function (c) {
+      var ok = c.getAttribute('data-lang') === lang &&
+               (topic === 'all' || (' ' + c.getAttribute('data-topics') + ' ').indexOf(' ' + topic + ' ') > -1);
+      c.hidden = !ok; if (ok) shown++;
+    });
+    empty.hidden = shown > 0;
+  }
+  document.querySelectorAll('.lang-switch button').forEach(function (b) {
+    b.addEventListener('click', function () {
+      lang = b.getAttribute('data-lang');
+      document.querySelectorAll('.lang-switch button').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      apply();
+    });
+  });
+  document.querySelectorAll('.chip').forEach(function (b) {
+    b.addEventListener('click', function () {
+      topic = b.getAttribute('data-topic');
+      document.querySelectorAll('.chip').forEach(function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      apply();
+    });
+  });
+})();
+</script>
+</body>
+</html>
