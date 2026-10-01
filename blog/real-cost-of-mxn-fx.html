@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>The Real Cost of MXN FX: All-In Basis Points, Idle Cash and When to Switch | Rio</title>
+<meta name="description" content="The three parts of an FX cost, a two-minute test that shows whether your bank is executing or just quoting, the idle-cash cost no invoice shows, and the arithmetic of switching provider." />
+<link rel="icon" href="../assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/rio.css?v=33" />
+<link rel="canonical" href="https://www.rio.trade/blog/real-cost-of-mxn-fx">
+<link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/real-cost-of-mxn-fx">
+<link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares">
+<link rel="alternate" hreflang="x-default" href="https://www.rio.trade/blog/real-cost-of-mxn-fx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Real Cost of MXN FX: All-In Basis Points, Idle Cash and When to Switch | Rio">
+<meta property="og:description" content="The three parts of an FX cost, a two-minute test that shows whether your bank is executing or just quoting, the idle-cash cost no invoice shows, and the arithmetic of switching provider.">
+<meta property="og:url" content="https://www.rio.trade/blog/real-cost-of-mxn-fx">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "The real cost of your MXN FX: three parts, the one no invoice shows, and when it pays to switch", "description": "The three parts of an FX cost, a two-minute test that shows whether your bank is executing or just quoting, the idle-cash cost no invoice shows, and the arithmetic of switching provider.", "inLanguage": "en", "articleSection": "FX", "url": "https://www.rio.trade/blog/real-cost-of-mxn-fx", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "What is a basis point?", "acceptedAnswer": {"@type": "Answer", "text": "One hundredth of one percent. A hundred basis points is one percent. On a million dollars, one basis point is a hundred dollars. Institutional FX is negotiated in basis points rather than percentages because at USD 20 million a month, the gap between 5 and 25 basis points is USD 480 thousand a year."}}, {"@type": "Question", "name": "How do I calculate the all-in cost of a trade?", "acceptedAnswer": {"@type": "Answer", "text": "Divide the pesos you delivered by the dollars you received to get the rate you really got, then compare it with the market rate at the moment of the trade. The gap, in basis points, is your all-in cost. Use the exact time of execution, not the day's close."}}, {"@type": "Question", "name": "Why do my bank and my provider show me the same exchange rate?", "acceptedAnswer": {"@type": "Answer", "text": "Because they are almost certainly showing you a reference for the day, not the price they executed at. Two independent counterparties almost never execute at the same price to the fourth decimal. Matching rates mean one quote passed along, not competition."}}, {"@type": "Question", "name": "Is cash in transit a real cost?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. A two-day settlement cycle on recurring flow keeps a permanent balance outside your working capital, and it leaves the FX risk between order and settlement with you. The cost is invisible only because it is paid in lost opportunity rather than fees."}}, {"@type": "Question", "name": "Does Rio publish its spreads?", "acceptedAnswer": {"@type": "Answer", "text": "No. The price depends on volume, corridor and market conditions at the moment of the trade, so a posted tariff would mislead. What Rio does give you is the market rate and the spread separately on every quote, which is the only thing that makes one provider comparable with another."}}]}</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="../index.html"><img src="../assets/rio-logo.png" alt="Rio" /></a>
+    <div class="nav-links">
+      <div class="dd">
+        <button type="button">Products <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../fx.html"><div><div class="t">FX &amp; Liquidity <span class="badge live">Live</span></div><div class="d">Stablecoins against LatAm currencies</div></div></a>
+          <a class="dd-item" href="../payments.html"><div><div class="t">Cross-border Payments <span class="badge now">Beta</span></div><div class="d">Move money in and out of Latin America</div></div></a>
+          <a class="dd-item" href="../accounts.html"><div><div class="t">Virtual Accounts <span class="badge now">Beta</span></div><div class="d">Stablecoin wallets &amp; USD accounts in beta, LatAm soon</div></div></a>
+        </div>
+      </div>
+      <a href="../developers.html">Developers</a>
+      <a href="../about.html">About</a>
+      <div class="dd">
+        <button type="button">Resources <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../blog.html"><div><div class="t">Blog</div><div class="d">Notes on FX, liquidity and rails in LatAm</div></div></a>
+          <a class="dd-item" href="../contact.html"><div><div class="t">Contact</div><div class="d">Talk to the team about your flows</div></div></a>
+          <a class="dd-item" href="../legal.html"><div><div class="t">Legal</div><div class="d">Terms, privacy and sanctions by jurisdiction</div></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-cta" href="https://app.rio.trade/en/login">Log In</a>
+  </div>
+</nav>
+
+<header class="page-hero post-hero">
+  <div class="container">
+    <div class="eyebrow rv"><span class="idx">02 / 04</span> MXN corridor series</div>
+    <h1 class="rv d1">The real cost of your MXN FX: three parts, the one no invoice shows, and when it pays to switch</h1>
+    <p class="sub rv d2">Most treasuries cannot say, to the basis point, what they pay for pesos. Here is how to find out in two weeks, and how to decide whether the number is worth changing.</p>
+    <div class="post-meta rv d3">
+      <div class="byline">
+        <div class="avatar" aria-hidden="true">GO</div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth at Rio<br>FX, <time datetime="2026-10-01">October 1, 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">7 min read</span></div>
+      </div>
+      <div class="post-tools">
+        <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="real-cost-of-mxn-fx.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="es/costo-real-fx-pesos-dolares.html" hreflang="es-MX" lang="es">ES</a></span>
+        <button class="share" type="button" onclick="navigator.share?navigator.share({title:document.title,url:location.href}):navigator.clipboard.writeText(location.href)">Share</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+<article class="post">
+  <section class="keynum" aria-label="Start with one test">
+    <p class="big">Open your bank's FX screen. Open a second bank's. If the dollar-peso rate matches to the <b>fourth decimal</b>, you are not looking at two prices.</p>
+    <p class="small">You are looking at one reference, passed along twice. Two desks that actually trade almost never land on the same price to four decimals. That is the whole problem with measuring FX cost, and it takes two minutes to see.</p>
+  </section>
+
+  <p>This is written for whoever runs treasury or FX at a fintech, PSP, remittance company or exporter converting more than USD 5 million a month. Below that, the exercise is still right but rarely worth a provider change. Above it, the gap between what you pay and what you could pay is often the size of a senior finance salary.</p>
+
+  <h2>The three pockets</h2>
+  <p>An FX cost has three parts, and providers can move money between them.</p>
+  <ol class="steps">
+    <li><strong>The spread.</strong> The gap between the rate you get and the market rate at that moment. The biggest part and the hardest to see.</li>
+    <li><strong>The transfer fee.</strong> Moving the money: a network fee on a stablecoin, correspondent fees on a wire. Small next to the spread at institutional size.</li>
+    <li><strong>The fiat fee.</strong> A charge for receiving or paying out pesos on the local rail, when it is billed separately.</li>
+  </ol>
+  <p>This is why comparing published fees gets you nowhere. A provider can post a very low fee and make it back in the rate it executes at, and no invoice will show it. The fee and the spread are two pockets of the same coat.</p>
+  <p>A basis point is one hundredth of one percent. On a million dollars, one basis point is a hundred dollars. Hold on to that for the table below.</p>
+
+  <h2>How to find out what you pay today</h2>
+  <p>Most treasuries cannot see it, and not from carelessness. If your accounting system books the trade at the day's reference rate, the peso figure in the ledger is a calculation, not the rate you got. The real cost lives outside the record. So you have to go and get it.</p>
+  <aside class="test" aria-labelledby="measure">
+    <h3 id="measure">The measurement</h3>
+    <ol class="steps">
+      <li>Write down the market rate at the exact minute of the trade. Not the day's close. USD/MXN often moves more in a day than the spread you are trying to find.</li>
+      <li>Write down the pesos that actually left your account and the dollars that actually arrived.</li>
+      <li>Divide one by the other. That is the rate you really got.</li>
+      <li>Compare it with the market rate and express the gap in basis points. That is your all-in cost.</li>
+    </ol>
+    <p>Do this for every trade for two weeks. You will end up with the number your provider never put on an invoice.</p>
+  </aside>
+
+  <h2>The cost no invoice shows</h2>
+  <p>Time. On the banking road a USD/MXN trade settles two business days later. For those two days your cash is committed, earns nothing, and you carry the risk that the rate moves between order and settlement. Someone absorbs that risk, and the bank charges for it inside the spread.</p>
+  <p>Move USD 50 million a month in trades spread across the month and T+2 means several million dollars permanently in transit. If you had to borrow that on a credit line, the cost would have a line item. Because it comes out of working capital, nobody measures it.</p>
+  <p>A stablecoin conversion that settles in one to two minutes removes the money in transit. The price you accept is the price you settle at, in the same minute. <a href="anatomy-usdc-to-mxn-trade.html">Piece 01 in this series</a> follows a USD 10 million trade down both roads, with timestamps.</p>
+
+  <h2>What is paid in Mexico</h2>
+  <!-- GATE G2: desk re-confirms "tens of basis points" and "single digits for the largest clients" as publishable -->
+  <p>There is no public benchmark for this market, so what follows is what Rio sees in the trades it executes in Mexico, not an industry statistic. On corporate peso-dollar conversions, the all-in cost against the market rate is usually in the tens of basis points. Rio's largest-volume clients trade in single digits.</p>
+  <p>Put numbers on it. A fintech converting USD 20 million a month at 25 basis points all-in leaves USD 50 thousand a month in the spread, USD 600 thousand a year. The same fintech at 5 basis points pays USD 10 thousand a month. The difference, USD 480 thousand a year, is the cost of never having run the test above.</p>
+
+  <h2>When it pays to switch</h2>
+  <p>There is no rule of thumb. It is arithmetic: each basis point of improvement, times your monthly volume, times twelve. If that does not cover the cost of migrating, integrating and clearing compliance again, stay where you are.</p>
+  <div class="tablewrap"><table>
+    <caption class="sans" style="text-align:left;color:var(--muted);padding-bottom:.5rem">Annual saving, in USD, by monthly volume and basis points of improvement</caption>
+    <thead><tr><th scope="col">Monthly volume</th><th scope="col" class="num">5 bps</th><th scope="col" class="num">10 bps</th><th scope="col" class="num">25 bps</th><th scope="col" class="num">50 bps</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">USD 1 million</th><td class="num">6,000</td><td class="num">12,000</td><td class="num">30,000</td><td class="num">60,000</td></tr>
+      <tr><th scope="row">USD 5 million</th><td class="num">30,000</td><td class="num">60,000</td><td class="num">150,000</td><td class="num">300,000</td></tr>
+      <tr><th scope="row">USD 20 million</th><td class="num">120,000</td><td class="num">240,000</td><td class="num">600,000</td><td class="num">1,200,000</td></tr>
+      <tr><th scope="row">USD 50 million</th><td class="num">300,000</td><td class="num">600,000</td><td class="num">1,500,000</td><td class="num">3,000,000</td></tr>
+    </tbody>
+  </table></div>
+  <p>Against that saving, count the cost of change: engineering time, onboarding and compliance with a new counterparty, and the weeks of running two providers side by side. At USD 1 million a month, ten basis points rarely cover it. At USD 20 million, five can. Same basis points, opposite decisions.</p>
+
+  <h2>Seven things to ask, so the quotes line up</h2>
+  <p>Ask every provider the same thing, the same day, for the same amount. If each answers in a different format, you have nothing to compare.</p>
+  <ol class="steps">
+    <li>The market rate and the spread, separately. Not one blind number.</li>
+    <li>The all-in cost in basis points against that market rate.</li>
+    <li>Whether network and fiat fees are inside the number or billed apart.</li>
+    <li>Whether the price is firm, and for how long, or only indicative.</li>
+    <li>Up to what size it holds without moving.</li>
+    <li>When it settles, T+2, T+1 or minutes, and how much cash sits in transit meanwhile.</li>
+    <li>How it changes outside New York hours and on weekends. <a href="mxn-liquidity-by-the-hour.html">Piece 03</a> is about that.</li>
+  </ol>
+  <p>A quote you cannot split into market rate plus spread is not comparable with any other. Full stop.</p>
+
+  <h2>What changes with Rio</h2>
+  <p>Four things, and you can check all four with the measurement above.</p>
+  <p><strong>One number.</strong> Every quote is an all-in price against the live market rate, with the market rate and the spread shown separately. No taker fee, no separate fiat fee. The spread in the quote is the whole cost.</p>
+  <p><strong>Firm for the full amount.</strong> The quote can be executed for the quoted size for about ten seconds. No re-quote at confirmation, no last look.</p>
+  <p><strong>Single digits at institutional volume.</strong> Rio's largest clients trade in single-digit basis points against the market rate. Pricing is agreed by volume and corridor, not posted as a tariff.</p>
+  <p><strong>Minutes, not T+2.</strong> Stablecoin to pesos over SPEI, or pesos to stablecoin, in one to two minutes, seven days a week. The money in transit leaves your balance sheet.</p>
+  <p>For large tickets or known payment dates there is also TWAP execution, forwards, and an overdraft that lets you settle your side up to three days after receiving the local currency. Details in the <a href="https://docs.rio.trade">developer docs</a>.</p>
+
+  <section class="faq" aria-labelledby="faq">
+    <h2 id="faq">FAQ</h2>
+    <h3>What is a basis point?</h3>
+    <p>One hundredth of one percent. A hundred basis points is one percent. On a million dollars, one basis point is a hundred dollars. Institutional FX is negotiated in basis points rather than percentages because at USD 20 million a month, the gap between 5 and 25 basis points is USD 480 thousand a year.</p>
+    <h3>How do I calculate the all-in cost of a trade?</h3>
+    <p>Divide the pesos you delivered by the dollars you received to get the rate you really got, then compare it with the market rate at the moment of the trade. The gap, in basis points, is your all-in cost. Use the exact time of execution, not the day's close.</p>
+    <h3>Why do my bank and my provider show me the same exchange rate?</h3>
+    <p>Because they are almost certainly showing you a reference for the day, not the price they executed at. Two independent counterparties almost never execute at the same price to the fourth decimal. Matching rates mean one quote passed along, not competition.</p>
+    <h3>Is cash in transit a real cost?</h3>
+    <p>Yes. A two-day settlement cycle on recurring flow keeps a permanent balance outside your working capital, and it leaves the FX risk between order and settlement with you. The cost is invisible only because it is paid in lost opportunity rather than fees.</p>
+    <h3>Does Rio publish its spreads?</h3>
+    <p>No. The price depends on volume, corridor and market conditions at the moment of the trade, so a posted tariff would mislead. What Rio does give you is the market rate and the spread separately on every quote, which is the only thing that makes one provider comparable with another.</p>
+  </section>
+  <section class="about" aria-labelledby="about">
+    <h2 id="about">About Rio</h2>
+    <p>Rio is stablecoin FX infrastructure for Latin America. It provides liquidity, conversion and payout to local rails in Mexico, Colombia and Peru for fintechs and enterprises, with all-in pricing against the market rate, firm quotes for the full amount and settlement in minutes. Rio runs more than USD 8 billion in annualized volume.</p>
+    <!-- GATE: legal paragraph pending Luis -->
+    <p class="legal">In Mexico, FX services are provided by Rampa Blockchain, S.A.P.I. de C.V. Rio is a technology company, not a bank, and does not take deposits.</p>
+  </section>
+
+  <h2>Related</h2>
+  <ul class="related">
+    <li><a href="anatomy-usdc-to-mxn-trade.html"><span>01</span>Anatomy of a USD 10 million USDC to MXN trade</a></li>
+    <li><a href="mxn-liquidity-by-the-hour.html"><span>03</span>MXN liquidity by the hour: why Friday at 5pm costs more</a></li>
+    <li><a href="spei-vs-spid-mexico-rails.html"><span>04</span>SPEI vs SPID: how pesos and dollars move inside Mexico</a></li>
+  </ul>
+  <aside class="cta">
+    <p>Firm prices, settled in minutes. USDC and USDT against MXN, COP and PEN, 24/7.</p>
+    <a class="btn" href="../contact.html">Talk to Rio</a>
+  </aside>
+  <p class="updated">Last updated: <time datetime="2026-10-01">October 1, 2026</time></p>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-brand">
+        <div class="footer-logo"><img src="../assets/rio-logo.png" alt="Rio" /></div>
+        <p>FX infrastructure for Latin America. Liquidity, payments, and accounts for fintechs and enterprises.</p>
+      </div>
+      <div class="f-col">
+        <h5>Product &amp; company</h5>
+        <div class="links">
+          <a href="../developers.html">Developers</a>
+          <a href="../about.html">About</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+          <a href="https://app.rio.trade/en/login">Log In</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Products</h5>
+        <div class="links">
+          <a href="../fx.html">FX &amp; Liquidity</a>
+          <a href="../payments.html">Cross-border Payments</a>
+          <a href="../accounts.html">Virtual Accounts</a>
+        </div>
+      </div>
+      <div class="f-legal">
+        <h5>Legal</h5>
+        <div class="links row">
+          <a href="../legal.html">Terms &amp; Conditions</a>
+          <a href="../legal.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="f-base">
+        <span>© 2026 Rio</span>
+        <a href="mailto:hello@rio.trade">hello@rio.trade</a>
+        <span>FX infrastructure for Latin America</span>
+      </div>
+      <div class="f-disclaimer">
+        <div class="f-dcol">
+          <h5>Legal entities</h5>
+          <p>Rio is a brand of Rampa Holdings Limited and its group entities. Rio is a technology company, not a bank, and does not take deposits. Services are provided by the Rio group entity identified in your agreement: FX services in Mexico are provided by Rampa Blockchain, S.A.P.I. de C.V., which performs operations with virtual assets as a vulnerable activity under Article 17, Section XVI of the Mexican LFPIORPI; services in Peru are provided by Rampa Machu S.A.C.; payment services in Colombia are provided by Rampa Colombia S.A.S. (NIT 901.700.811-9); digital-asset trading for eligible international clients is provided by Rampa Labs Inc., a Money Services Business registered with FinCEN, acting as principal. Digital assets, including stablecoins, are not legal tender, are not backed or guaranteed by any government, and are not FDIC- or SIPC-insured. Cross-border Payments and Virtual Accounts have not launched and are subject to regulatory approvals. Nothing on this site is an offer to any person in a jurisdiction where such offer would be unlawful. See <a href="../legal.html">Terms &amp; Conditions</a>.</p>
+        </div>
+        <div class="f-dcol">
+          <h5>Availability &amp; product status</h5>
+          <p><span class="mk">*</span> Live markets are available to eligible business clients onboarded by the relevant Rio group entity, subject to eligibility, onboarding and applicable law. Products and services are not available in all jurisdictions. <span class="mk">**</span> Beta refers to a pre-launch program: joining the beta waitlist does not open an account or create any right to receive services. Features are shown for illustration and remain subject to the licenses, registrations and regulatory approvals applicable in each jurisdiction. The regulated provider of each service will be identified at launch. USD accounts are expected to be provided by a regulated U.S. financial institution; stablecoin wallets are expected to be self-custodial &mdash; Rio will not hold your private keys. <span class="mk">&dagger;</span> Planned. Not currently offered. Launch in each jurisdiction is subject to applicable licenses, registrations and regulatory approvals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/rio.js?v=13"></script>
+</body>
+</html>

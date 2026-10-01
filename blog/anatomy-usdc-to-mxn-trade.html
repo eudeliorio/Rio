@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Anatomy of a USD 10M USDC to MXN Trade: Rails, Costs and Settlement | Rio</title>
+<meta name="description" content="One USD 10 million dollars-to-pesos order, placed Tuesday at 3:14pm, followed minute by minute through a bank wire and through Rio. Where the spread, the idle cash and the hours go." />
+<link rel="icon" href="../assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/rio.css?v=33" />
+<link rel="canonical" href="https://www.rio.trade/blog/anatomy-usdc-to-mxn-trade">
+<link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/anatomy-usdc-to-mxn-trade">
+<link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/anatomia-operacion-usdc-a-pesos">
+<link rel="alternate" hreflang="x-default" href="https://www.rio.trade/blog/anatomy-usdc-to-mxn-trade">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Anatomy of a USD 10M USDC to MXN Trade: Rails, Costs and Settlement | Rio">
+<meta property="og:description" content="One USD 10 million dollars-to-pesos order, placed Tuesday at 3:14pm, followed minute by minute through a bank wire and through Rio. Where the spread, the idle cash and the hours go.">
+<meta property="og:url" content="https://www.rio.trade/blog/anatomy-usdc-to-mxn-trade">
+<meta property="og:image" content="https://www.rio.trade/img/blog/rio-blog-01-two-routes.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Anatomy of a USD 10 million USDC to MXN trade: where the money goes at every step", "description": "One USD 10 million dollars-to-pesos order, placed Tuesday at 3:14pm, followed minute by minute through a bank wire and through Rio. Where the spread, the idle cash and the hours go.", "inLanguage": "en", "url": "https://www.rio.trade/blog/anatomy-usdc-to-mxn-trade", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Why does bank FX into Mexico settle two days later?", "acceptedAnswer": {"@type": "Answer", "text": "T+2 is the standard settlement cycle for USD/MXN in the interbank market, and CLS settles on that value date, not on the trade date. It removes the risk that one side pays and the other does not. It does not make the cycle shorter. With Rio the price is locked when you accept and the payout follows within minutes of your settlement, because both the stablecoin and SPEI run around the clock."}}, {"@type": "Question", "name": "Is stablecoin conversion more expensive outside market hours?", "acceptedAnswer": {"@type": "Answer", "text": "Peso liquidity thins outside the New York session and over the weekend, and spreads widen on every road, bank or stablecoin. The difference is that a firm all-in quote shows you the off-hours cost before you execute, so you can decide whether to trade now or wait for the open. Piece 03 covers the hour-by-hour picture."}}, {"@type": "Question", "name": "What does \"firm price\" mean in practice?", "acceptedAnswer": {"@type": "Answer", "text": "A price the provider has to honor for the quoted amount during its validity window. The opposite is an indicative price, which can change at confirmation, or a quote with last look, where the provider can reject the trade after you accept. Rio's quotes are firm for about ten seconds for the full amount, no last look."}}, {"@type": "Question", "name": "What is a TWAP and when does it make sense?", "acceptedAnswer": {"@type": "Answer", "text": "Time-weighted average price. A large order is split into slices across a set window so your fill lands near the window's average rather than one instant's price. Use it whenever a single ticket is big enough to move the market against you if crossed at once. For MXN outside US hours, that can happen well below USD 10 million."}}, {"@type": "Question", "name": "Which networks can the settlement arrive on?", "acceptedAnswer": {"@type": "Answer", "text": "Solana, Arc, Stellar, Polygon, Tron, Ethereum and Base, in USDC or USDT. The network affects how fast your settlement confirms and what the network fee is. It does not affect the FX price, which is quoted against the market rate regardless of network. Details in the developer docs."}}]}</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="../index.html"><img src="../assets/rio-logo.png" alt="Rio" /></a>
+    <div class="nav-links">
+      <div class="dd">
+        <button type="button">Products <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../fx.html"><div><div class="t">FX &amp; Liquidity <span class="badge live">Live</span></div><div class="d">Stablecoins against LatAm currencies</div></div></a>
+          <a class="dd-item" href="../payments.html"><div><div class="t">Cross-border Payments <span class="badge now">Beta</span></div><div class="d">Move money in and out of Latin America</div></div></a>
+          <a class="dd-item" href="../accounts.html"><div><div class="t">Virtual Accounts <span class="badge now">Beta</span></div><div class="d">Stablecoin wallets &amp; USD accounts in beta, LatAm soon</div></div></a>
+        </div>
+      </div>
+      <a href="../developers.html">Developers</a>
+      <a href="../about.html">About</a>
+      <div class="dd">
+        <button type="button">Resources <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../blog.html"><div><div class="t">Blog</div><div class="d">Notes on FX, liquidity and rails in LatAm</div></div></a>
+          <a class="dd-item" href="../contact.html"><div><div class="t">Contact</div><div class="d">Talk to the team about your flows</div></div></a>
+          <a class="dd-item" href="../legal.html"><div><div class="t">Legal</div><div class="d">Terms, privacy and sanctions by jurisdiction</div></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-cta" href="https://app.rio.trade/en/login">Log In</a>
+  </div>
+</nav>
+
+<header class="page-hero post-hero">
+  <div class="container">
+    <div class="eyebrow rv"><span class="idx">01 / 04</span> MXN corridor series</div>
+    <h1 class="rv d1">Anatomy of a USD 10 million USDC to MXN trade: where the money goes at every step</h1>
+    <p class="sub rv d2">One order. Tuesday, 3:14pm, Mexico City. We follow it down a bank wire and down a stablecoin trade with Rio, minute by minute.</p>
+    <div class="post-meta rv d3">
+      <div class="byline">
+        <div class="avatar" aria-hidden="true">GO</div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth at Rio<br>Markets, <time datetime="2026-10-01">October 1, 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">8 min read</span></div>
+      </div>
+      <div class="post-tools">
+        <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="anatomy-usdc-to-mxn-trade.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="es/anatomia-operacion-usdc-a-pesos.html" hreflang="es-MX" lang="es">ES</a></span>
+        <button class="share" type="button" onclick="navigator.share?navigator.share({title:document.title,url:location.href}):navigator.clipboard.writeText(location.href)">Share</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+<article class="post">
+
+  <section class="keynum" aria-label="Start with one number">
+    <p class="big">On a USD 10 million trade, one centavo of markup is <b>MXN 100,000</b>. Ten centavos is a million pesos.</p>
+    <p class="small">Hold on to that. Most of what follows is about centavos, and about hours, which are centavos in disguise.</p>
+  </section>
+
+  <h2>The order</h2>
+  <p>A payments company has to fund merchant payouts in Mexico. It needs the pesos from USD 10 million in its Mexican account before Thursday. It is Tuesday, 3:14pm in Mexico City, 4:14pm in New York. The peso market is wide open.</p>
+  <p>The treasurer has two ways to do it.</p>
+
+  <!-- Diagram slot: inline rio-blog-01-two-routes.svg here (v3, or two-clocks v4). Same content is in the two timelines below. -->
+
+  <div class="roads">
+    <section class="road road-a" aria-labelledby="road-a">
+      <h2 id="road-a">Road A: the bank wire</h2>
+      <ol class="timeline">
+        <li><time datetime="2026-09-29T15:14-06:00">Tuesday, 3:14pm</time><p>The treasurer calls the bank's FX desk or hits the button on the portal. The bank shows one rate. One number. Not the market rate plus a markup, just the rate. The treasurer accepts. The dollars are debited.</p></li>
+        <li><time datetime="2026-09-29T15:20-06:00">Tuesday, 3:20pm</time><p>A SWIFT message leaves for the bank's correspondent, the institution it uses to reach Mexico. From this moment the treasurer no longer controls anything. There is no status page.</p></li>
+        <li class="wait"><time>Tuesday night, Wednesday</time><p>Three compliance teams look at the payment: the sending bank, the correspondent, the receiving bank in Mexico. Any one of them can hold it for questions. Most days none do. Some days one does, and the treasurer finds out on Thursday when the pesos are not there.</p></li>
+        <li><time datetime="2026-10-01">Thursday</time><p>Value date. The dollars-for-pesos leg settles through CLS, the system that makes sure both sides of an FX trade pay at the same time. T+2 by market convention. The pesos are credited to the company's Mexican account at some point during Thursday's banking hours, net of whatever the correspondent charged along the way. The treasurer sees a smaller peso number than expected and a line item that says "fees."</p></li>
+        <li><time datetime="2026-10-01">Thursday afternoon</time><p>The pesos go out over SPEI to the merchants. That part takes seconds. SPEI was never the problem.</p></li>
+      </ol>
+      <p class="elapsed"><strong>Elapsed: roughly 44 hours.</strong> For all of them, USD 10 million is nobody's. Not the company's, not the merchants'. In transit.</p>
+    </section>
+
+    <section class="road road-b" aria-labelledby="road-b">
+      <h2 id="road-b">Road B: the same order with Rio</h2>
+      <ol class="timeline">
+        <li><time datetime="2026-09-29T15:14:00-06:00">3:14:00pm</time><p>The treasurer requests a quote for USDC to MXN, USD 10 million. Rio returns one all-in number against the live market rate, with the market rate and the spread shown separately. The quote is firm for the full amount for about ten seconds.</p></li>
+        <li><time datetime="2026-09-29T15:14:08-06:00">3:14:08pm</time><p>The treasurer accepts. The trade is booked at that price. Not "subject to confirmation." Booked. There is no last look, the bank practice of rejecting a trade after you accepted it. No re-quote. No taker fee or fiat in/out fee on top.</p></li>
+        <li><time datetime="2026-09-29T15:14:40-06:00">3:14:40pm</time><p>The treasurer sends USD 10 million in USDC from the company's own wallet to Rio's deposit address, on Solana this time (it could be Arc, Stellar, Polygon, Tron, Ethereum or Base). The network confirms in seconds. No correspondent. No SWIFT.</p></li>
+        <!-- GATE G2: if third-party payouts are not live on publish day, replace the CLABE sentence with: "to the CLABE the company whitelisted when it onboarded, at the Mexican bank of its choice." -->
+        <li><time datetime="2026-09-29T15:15:32-06:00">3:15:32pm</time><p>Rio's system sees the settlement land and pays the pesos out over SPEI, automatically, to the CLABEs the company whitelisted when it onboarded. Its own account, or straight to the merchants. The merchants have their pesos before the treasurer has finished reading the confirmation.</p></li>
+      </ol>
+      <p class="elapsed"><strong>Elapsed: about 90 seconds.</strong> It is still Tuesday. The dollars were the company's until 3:14:40pm and the pesos were the company's from 3:15:32pm. The 44 hours did not happen.</p>
+      <p class="still">The same flow runs backwards, by the way. Sell pesos, settle over SPEI, USDC lands in the whitelisted wallet. Any day of the week, any hour, except during SPEI's announced maintenance windows.</p>
+    </section>
+  </div>
+
+  <!-- GATE G1: legal paragraph pending Luis -->
+  <p class="legal">In Mexico, FX services are provided by Rampa Blockchain, S.A.P.I. de C.V., which performs operations with virtual assets as a vulnerable activity under Article 17, Section XVI of the LFPIORPI. Rio is not a direct SPEI participant. It settles through its own accounts at regulated Mexican banks.</p>
+
+  <h2>Where the centavos went</h2>
+  <p>Now put the two logs side by side and look for the money.</p>
+  <h3>The rate</h3>
+  <p>On Road A the treasurer saw one number and had no way to know how many centavos sat between it and the market. On Road B the market rate and the spread were on the screen before the trade. You can argue about whether a spread is fair. You cannot argue about a spread you cannot see. And remember: ten centavos on this ticket is a million pesos.</p>
+  <h3>The 44 hours</h3>
+  <p>USD 10 million out of working capital for two days, every time. A company moving USD 50 million a month in trades spread across the month has several million dollars permanently in transit. That money is not earning, not paying suppliers, not sitting as a buffer. It is in a correspondent's ledger.</p>
+  <h3>The gap</h3>
+  <p>On Road A the rate was fixed on Tuesday and the pesos arrived Thursday. Someone carried the risk of USD/MXN moving in between, and that someone priced it into the rate. On Road B the price was locked at 3:14:08 and settlement was done by 3:15:32. There was no gap to price.</p>
+  <h3>The calendar</h3>
+  <p>The Road A order worked because it was Tuesday afternoon. Had it been Friday at 6pm, the pesos would have arrived Tuesday or Wednesday. Road B does not care what day it is. Peso liquidity is thinner outside New York hours on every road, that is just the market, but on Road B the off-hours cost shows up in the quote before you trade, not on a statement after. <a href="mxn-liquidity-by-the-hour.html">Piece 03 in this series</a> is about exactly that.</p>
+
+  <h2>The corridor in numbers</h2>
+  <div class="tablewrap"><table>
+    <tr><th scope="row">Currency</th><td>Mexican peso (MXN)</td></tr>
+    <tr><th scope="row">Rules</th><td>Free float. No capital controls. No tax on FX trades.</td></tr>
+    <tr><th scope="row">Size</th><td>USD 153 billion a day. 14th most traded currency in the world, 3rd among emerging markets. 82% trades outside Mexico, 98% against the dollar. (Banco de México, BIS 2025 survey)</td></tr>
+    <tr><th scope="row">Peso rail</th><td>SPEI. 24/7, credits in seconds.</td></tr>
+    <tr><th scope="row">Bank FX settlement</th><td>T+2. T+1 when both banks allow it.</td></tr>
+    <tr><th scope="row">Stablecoin FX settlement</th><td>One to two minutes from the moment you send your settlement, seven days a week.</td></tr>
+    <tr><th scope="row">Regulators</th><td>Banco de México and CNBV. Stablecoin conversion is supervised under Mexico's anti-money-laundering law (LFPIORPI).</td></tr>
+    <tr><th scope="row">Stablecoins</th><td>USDC, USDT</td></tr>
+    <tr><th scope="row">Networks</th><td>Solana, Arc, Stellar, Polygon, Tron, Ethereum, Base</td></tr>
+  </table></div>
+
+  <h2>Why the peso's price is set in New York</h2>
+  <p>The peso is a dollar market. 98% of it trades against USD, and most of that happens in New York and London, not Mexico. The rate on any screen is a reference that comes from the big banks trading with each other. Every layer between those banks and your account adds centavos, and the number of layers is not the number of competing prices. Two banks that show you the same rate to the fourth decimal are not competing for your business. They are passing along the same quote.</p>
+
+  <h2>Four questions to forward to your bank</h2>
+  <p>A tight spread on a screen means nothing by itself. These separate a liquidity provider from a middleman reselling someone else's price. Copy them into an email.</p>
+  <!-- GATE G3: desk sign-off on firm quote / no last look / TWAP / axes -->
+  <ol class="questions">
+    <li>Is your price firm or indicative, and for how long? A price that moves when I try to hit it is not a price. (Rio: firm for the full amount for about ten seconds, no last look.)</li>
+    <li>Up to what size does the price hold? A quote good to USD 500 thousand that degrades on every slice after that is useless for a USD 10 million ticket. What size is behind the number?</li>
+    <li>How do you handle an order big enough to move the market? The right answer is a TWAP, splitting the order across a time window so I get close to that window's average price instead of one instant's. Do you offer it?</li>
+    <li>What happens when you have flow the other way? A desk with some clients buying pesos and others selling can match them internally. Traders call it an axe, and when it happens the desk can price well inside its normal spread. Do you alert clients when you have one?</li>
+  </ol>
+
+  <h2>Case in point</h2>
+  <!-- GATE G4: wording to be cleared with the relationship owner -->
+  <p>One of the largest remittance networks in the world moved most of its Mexico FX flow onto Road B and measured a saving of about 30% against its previous banks, with settlement in minutes instead of days. The saving came from the rate, the hours and the gap together, not from any one of them.</p>
+
+  <section class="faq" aria-labelledby="faq">
+    <h2 id="faq">FAQ</h2>
+    <h3>Why does bank FX into Mexico settle two days later?</h3>
+    <p>T+2 is the standard settlement cycle for USD/MXN in the interbank market, and CLS settles on that value date, not on the trade date. It removes the risk that one side pays and the other does not. It does not make the cycle shorter. With Rio the price is locked when you accept and the payout follows within minutes of your settlement, because both the stablecoin and SPEI run around the clock.</p>
+    <h3>Is stablecoin conversion more expensive outside market hours?</h3>
+    <p>Peso liquidity thins outside the New York session and over the weekend, and spreads widen on every road, bank or stablecoin. The difference is that a firm all-in quote shows you the off-hours cost before you execute, so you can decide whether to trade now or wait for the open. Piece 03 covers the hour-by-hour picture.</p>
+    <h3>What does "firm price" mean in practice?</h3>
+    <p>A price the provider has to honor for the quoted amount during its validity window. The opposite is an indicative price, which can change at confirmation, or a quote with last look, where the provider can reject the trade after you accept. Rio's quotes are firm for about ten seconds for the full amount, no last look.</p>
+    <h3>What is a TWAP and when does it make sense?</h3>
+    <p>Time-weighted average price. A large order is split into slices across a set window so your fill lands near the window's average rather than one instant's price. Use it whenever a single ticket is big enough to move the market against you if crossed at once. For MXN outside US hours, that can happen well below USD 10 million.</p>
+    <h3>Which networks can the settlement arrive on?</h3>
+    <p>Solana, Arc, Stellar, Polygon, Tron, Ethereum and Base, in USDC or USDT. The network affects how fast your settlement confirms and what the network fee is. It does not affect the FX price, which is quoted against the market rate regardless of network. Details in the <a href="https://docs.rio.trade">developer docs</a>.</p>
+  </section>
+
+  <section class="about" aria-labelledby="about">
+    <h2 id="about">About Rio</h2>
+    <p>Rio is stablecoin FX infrastructure for Latin America. It provides liquidity, conversion and payout to local rails in Mexico, Colombia and Peru for fintechs and enterprises, with all-in pricing against the market rate, firm quotes for the full amount and settlement in minutes. Rio runs more than USD 8 billion in annualized volume.</p>
+    <!-- GATE G1 -->
+    <p class="legal">In Mexico, FX services are provided by Rampa Blockchain, S.A.P.I. de C.V. Rio is a technology company, not a bank, and does not take deposits.</p>
+  </section>
+
+  <h2>Related</h2>
+  <ul class="related">
+    <li><a href="real-cost-of-mxn-fx.html"><span>02</span>The real cost of your MXN FX: how to measure what you pay today</a></li>
+    <li><a href="mxn-liquidity-by-the-hour.html"><span>03</span>MXN liquidity by the hour: why Friday at 5pm costs more</a></li>
+    <li><a href="spei-vs-spid-mexico-rails.html"><span>04</span>SPEI vs SPID: how pesos and dollars move inside Mexico</a></li>
+  </ul>
+
+  <aside class="cta">
+    <p>Firm prices, settled in minutes. USDC and USDT against MXN, COP and PEN, 24/7.</p>
+    <a class="btn" href="../contact.html">Talk to Rio</a>
+  </aside>
+
+  <p class="updated">Last updated: <time datetime="2026-10-01">October 1, 2026</time></p>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-brand">
+        <div class="footer-logo"><img src="../assets/rio-logo.png" alt="Rio" /></div>
+        <p>FX infrastructure for Latin America. Liquidity, payments, and accounts for fintechs and enterprises.</p>
+      </div>
+      <div class="f-col">
+        <h5>Product &amp; company</h5>
+        <div class="links">
+          <a href="../developers.html">Developers</a>
+          <a href="../about.html">About</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+          <a href="https://app.rio.trade/en/login">Log In</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Products</h5>
+        <div class="links">
+          <a href="../fx.html">FX &amp; Liquidity</a>
+          <a href="../payments.html">Cross-border Payments</a>
+          <a href="../accounts.html">Virtual Accounts</a>
+        </div>
+      </div>
+      <div class="f-legal">
+        <h5>Legal</h5>
+        <div class="links row">
+          <a href="../legal.html">Terms &amp; Conditions</a>
+          <a href="../legal.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="f-base">
+        <span>© 2026 Rio</span>
+        <a href="mailto:hello@rio.trade">hello@rio.trade</a>
+        <span>FX infrastructure for Latin America</span>
+      </div>
+      <div class="f-disclaimer">
+        <div class="f-dcol">
+          <h5>Legal entities</h5>
+          <p>Rio is a brand of Rampa Holdings Limited and its group entities. Rio is a technology company, not a bank, and does not take deposits. Services are provided by the Rio group entity identified in your agreement: FX services in Mexico are provided by Rampa Blockchain, S.A.P.I. de C.V., which performs operations with virtual assets as a vulnerable activity under Article 17, Section XVI of the Mexican LFPIORPI; services in Peru are provided by Rampa Machu S.A.C.; payment services in Colombia are provided by Rampa Colombia S.A.S. (NIT 901.700.811-9); digital-asset trading for eligible international clients is provided by Rampa Labs Inc., a Money Services Business registered with FinCEN, acting as principal. Digital assets, including stablecoins, are not legal tender, are not backed or guaranteed by any government, and are not FDIC- or SIPC-insured. Cross-border Payments and Virtual Accounts have not launched and are subject to regulatory approvals. Nothing on this site is an offer to any person in a jurisdiction where such offer would be unlawful. See <a href="../legal.html">Terms &amp; Conditions</a>.</p>
+        </div>
+        <div class="f-dcol">
+          <h5>Availability &amp; product status</h5>
+          <p><span class="mk">*</span> Live markets are available to eligible business clients onboarded by the relevant Rio group entity, subject to eligibility, onboarding and applicable law. Products and services are not available in all jurisdictions. <span class="mk">**</span> Beta refers to a pre-launch program: joining the beta waitlist does not open an account or create any right to receive services. Features are shown for illustration and remain subject to the licenses, registrations and regulatory approvals applicable in each jurisdiction. The regulated provider of each service will be identified at launch. USD accounts are expected to be provided by a regulated U.S. financial institution; stablecoin wallets are expected to be self-custodial &mdash; Rio will not hold your private keys. <span class="mk">&dagger;</span> Planned. Not currently offered. Launch in each jurisdiction is subject to applicable licenses, registrations and regulatory approvals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/rio.js?v=13"></script>
+</body>
+</html>

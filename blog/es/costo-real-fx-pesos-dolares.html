@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>El costo real de su FX en pesos: puntos base all-in, efectivo ocioso y cuándo cambiar | Rio</title>
+<meta name="description" content="Las tres partes del costo de FX, una prueba de dos minutos que muestra si su banco ejecuta o solo cotiza, el costo del efectivo ocioso que ninguna factura muestra y la aritmética de cambiar de proveedor." />
+<link rel="icon" href="../../assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/rio.css?v=33" />
+<link rel="canonical" href="https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares">
+<link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares">
+<link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/real-cost-of-mxn-fx">
+<link rel="alternate" hreflang="x-default" href="https://www.rio.trade/blog/real-cost-of-mxn-fx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="El costo real de su FX en pesos: puntos base all-in, efectivo ocioso y cuándo cambiar | Rio">
+<meta property="og:description" content="Las tres partes del costo de FX, una prueba de dos minutos que muestra si su banco ejecuta o solo cotiza, el costo del efectivo ocioso que ninguna factura muestra y la aritmética de cambiar de proveedor.">
+<meta property="og:url" content="https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "El costo real de su FX en pesos: tres partes, la que ninguna factura muestra y cuándo conviene cambiar de proveedor", "description": "Las tres partes del costo de FX, una prueba de dos minutos que muestra si su banco ejecuta o solo cotiza, el costo del efectivo ocioso que ninguna factura muestra y la aritmética de cambiar de proveedor.", "inLanguage": "es-MX", "articleSection": "FX", "url": "https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "es-MX", "mainEntity": [{"@type": "Question", "name": "¿Qué es un punto base?", "acceptedAnswer": {"@type": "Answer", "text": "Una centésima de uno por ciento. Cien puntos base son uno por ciento. Sobre un millón de dólares, un punto base son cien dólares. El FX institucional se negocia en puntos base y no en porcentajes porque a USD 20 millones al mes, la diferencia entre 5 y 25 puntos base son USD 480 mil al año."}}, {"@type": "Question", "name": "¿Cómo calculo el costo all-in de una operación?", "acceptedAnswer": {"@type": "Answer", "text": "Divida los pesos que entregó entre los dólares que recibió para obtener el tipo de cambio que realmente obtuvo, y compárelo con el de mercado en el momento de la operación. La diferencia, en puntos base, es su costo all-in. Use la hora exacta de ejecución, no el cierre del día."}}, {"@type": "Question", "name": "¿Por qué mi banco y mi proveedor me muestran el mismo tipo de cambio?", "acceptedAnswer": {"@type": "Answer", "text": "Porque casi con seguridad le están mostrando una referencia del día, no el precio al que ejecutaron. Dos contrapartes independientes casi nunca ejecutan al mismo precio hasta el cuarto decimal. Tipos de cambio idénticos significan una cotización pasada de mano en mano, no competencia."}}, {"@type": "Question", "name": "¿El efectivo en tránsito es un costo real?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Un ciclo de liquidación de dos días sobre un flujo recurrente mantiene un saldo permanente fuera de su capital de trabajo, y le deja a usted el riesgo cambiario entre la orden y la liquidación. El costo es invisible solo porque se paga en oportunidad perdida y no en comisiones."}}, {"@type": "Question", "name": "¿Rio publica sus spreads?", "acceptedAnswer": {"@type": "Answer", "text": "No. El precio depende del volumen, del corredor y de las condiciones de mercado en el momento de la operación, así que una tarifa publicada engañaría. Lo que Rio sí le da es el tipo de cambio de mercado y el spread por separado en cada cotización, que es lo único que hace comparable a un proveedor con otro."}}]}</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="../../index.html"><img src="../../assets/rio-logo.png" alt="Rio" /></a>
+    <div class="nav-links">
+      <div class="dd">
+        <button type="button">Products <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../../fx.html"><div><div class="t">FX &amp; Liquidity <span class="badge live">Live</span></div><div class="d">Stablecoins against LatAm currencies</div></div></a>
+          <a class="dd-item" href="../../payments.html"><div><div class="t">Cross-border Payments <span class="badge now">Beta</span></div><div class="d">Move money in and out of Latin America</div></div></a>
+          <a class="dd-item" href="../../accounts.html"><div><div class="t">Virtual Accounts <span class="badge now">Beta</span></div><div class="d">Stablecoin wallets &amp; USD accounts in beta, LatAm soon</div></div></a>
+        </div>
+      </div>
+      <a href="../../developers.html">Developers</a>
+      <a href="../../about.html">About</a>
+      <div class="dd">
+        <button type="button">Resources <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../../blog.html"><div><div class="t">Blog</div><div class="d">Notes on FX, liquidity and rails in LatAm</div></div></a>
+          <a class="dd-item" href="../../contact.html"><div><div class="t">Contact</div><div class="d">Talk to the team about your flows</div></div></a>
+          <a class="dd-item" href="../../legal.html"><div><div class="t">Legal</div><div class="d">Terms, privacy and sanctions by jurisdiction</div></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-cta" href="https://app.rio.trade/en/login">Log In</a>
+  </div>
+</nav>
+
+<header class="page-hero post-hero">
+  <div class="container">
+    <div class="eyebrow rv"><span class="idx">02 / 04</span> Serie corredor MXN</div>
+    <h1 class="rv d1">El costo real de su FX en pesos: tres partes, la que ninguna factura muestra y cuándo conviene cambiar de proveedor</h1>
+    <p class="sub rv d2">La mayoría de las tesorerías no puede decir, al punto base, cuánto paga por sus pesos. Aquí va cómo averiguarlo en dos semanas, y cómo decidir si el número amerita un cambio.</p>
+    <div class="post-meta rv d3">
+      <div class="byline">
+        <div class="avatar" aria-hidden="true">GO</div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth en Rio<br>FX, <time datetime="2026-10-01">1 de octubre de 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">8 min de lectura</span></div>
+      </div>
+      <div class="post-tools">
+        <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="../real-cost-of-mxn-fx.html" hreflang="en" lang="en">EN</a><a href="costo-real-fx-pesos-dolares.html" hreflang="es-MX" lang="es" aria-current="true">ES</a></span>
+        <button class="share" type="button" onclick="navigator.share?navigator.share({title:document.title,url:location.href}):navigator.clipboard.writeText(location.href)">Compartir</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+<article class="post">
+  <section class="keynum" aria-label="Empiece con una prueba">
+    <p class="big">Abra la pantalla de FX de su banco. Abra la de un segundo banco. Si el tipo de cambio dólar-peso coincide hasta el <b>cuarto decimal</b>, no está viendo dos precios.</p>
+    <p class="small">Está viendo una sola referencia, pasada dos veces. Dos mesas que de verdad operan casi nunca caen en el mismo precio a cuatro decimales. Ese es todo el problema de medir el costo del FX, y se ve en dos minutos.</p>
+  </section>
+
+  <p>Esto está escrito para quien lleva la tesorería o el FX en una fintech, un PSP, una remesadora o un exportador que convierte más de USD 5 millones al mes. Por debajo de eso, el ejercicio sigue siendo correcto pero rara vez amerita cambiar de proveedor. Por encima, la brecha entre lo que paga y lo que podría pagar suele equivaler al sueldo de un directivo de finanzas.</p>
+
+  <h2>Los tres bolsillos</h2>
+  <p>Un costo de FX tiene tres partes, y los proveedores pueden mover el dinero entre ellas.</p>
+  <ol class="steps">
+    <li><strong>El spread.</strong> La diferencia entre el tipo de cambio que recibe y el de mercado en ese momento. La parte más grande y la más difícil de ver.</li>
+    <li><strong>La comisión de transferencia.</strong> Mover el dinero: una comisión de red en una stablecoin, comisiones de corresponsalía en una transferencia. Pequeña junto al spread en montos institucionales.</li>
+    <li><strong>La comisión de fiat.</strong> Un cargo por recibir o dispersar pesos en el riel local, cuando se cobra por separado.</li>
+  </ol>
+  <p>Por eso comparar tarifas publicadas no lleva a ningún lado. Un proveedor puede anunciar una comisión muy baja y recuperarla en el tipo de cambio al que ejecuta, y ninguna factura lo va a mostrar. La comisión y el spread son dos bolsillos del mismo saco.</p>
+  <p>Un punto base es una centésima de uno por ciento. Sobre un millón de dólares, un punto base son cien dólares. Guárdese ese dato para la tabla de abajo.</p>
+
+  <h2>Cómo saber cuánto paga hoy</h2>
+  <p>La mayoría de las tesorerías no lo puede ver, y no por descuido. Si su sistema contable registra la operación al tipo de cambio de referencia del día, la cifra en pesos que aparece en libros es un cálculo, no el tipo al que ejecutó. El costo real vive fuera del registro. Así que hay que ir por él.</p>
+  <aside class="test" aria-labelledby="medicion">
+    <h3 id="medicion">La medición</h3>
+    <ol class="steps">
+      <li>Anote el tipo de cambio de mercado en el minuto exacto de la operación. No el cierre del día. El USD/MXN suele moverse más en un día que el spread que está buscando.</li>
+      <li>Anote los pesos que realmente salieron de su cuenta y los dólares que realmente llegaron.</li>
+      <li>Divida uno entre otro. Ese es el tipo de cambio que realmente obtuvo.</li>
+      <li>Compárelo con el de mercado y exprese la diferencia en puntos base. Ese es su costo all-in.</li>
+    </ol>
+    <p>Hágalo con cada operación durante dos semanas. Va a terminar con el número que su proveedor nunca puso en una factura.</p>
+  </aside>
+
+  <h2>El costo que ninguna factura muestra</h2>
+  <p>El tiempo. En el camino bancario una operación USD/MXN liquida dos días hábiles después. Durante esos dos días su efectivo está comprometido, no genera nada, y usted carga con el riesgo de que el tipo de cambio se mueva entre la orden y la liquidación. Alguien absorbe ese riesgo, y el banco lo cobra dentro del spread.</p>
+  <p>Mueva USD 50 millones al mes en operaciones repartidas a lo largo del mes y T+2 significa varios millones de dólares permanentemente en tránsito. Si tuviera que pedir ese dinero en una línea de crédito, el costo tendría un renglón. Como sale del capital de trabajo, nadie lo mide.</p>
+  <p>Una conversión por stablecoin que liquida en uno a dos minutos elimina el dinero en tránsito. El precio que acepta es el precio al que liquida, en el mismo minuto. <a href="anatomia-operacion-usdc-a-pesos.html">El artículo 01 de esta serie</a> sigue una operación de USD 10 millones por ambos caminos, con hora y minuto.</p>
+
+  <h2>Cuánto se paga en México</h2>
+  <!-- GATE G2: la mesa reconfirma "decenas de puntos base" y "un dígito para los clientes más grandes" como publicable -->
+  <p>No existe una referencia pública para este mercado, así que lo que sigue es lo que Rio ve en las operaciones que ejecuta en México, no una estadística de la industria. En conversiones corporativas peso-dólar, el costo all-in contra el tipo de cambio de mercado suele estar en decenas de puntos base. Los clientes de mayor volumen de Rio operan en un dígito.</p>
+  <p>Póngale números. Una fintech que convierte USD 20 millones al mes a 25 puntos base all-in deja USD 50 mil al mes en el spread, USD 600 mil al año. La misma fintech a 5 puntos base paga USD 10 mil al mes. La diferencia, USD 480 mil al año, es el costo de nunca haber hecho la prueba de arriba.</p>
+
+  <h2>Cuándo conviene cambiar</h2>
+  <p>No hay regla general. Es aritmética: cada punto base de mejora, por su volumen mensual, por doce. Si eso no cubre el costo de migrar, integrar y volver a pasar por cumplimiento, quédese donde está.</p>
+  <div class="tablewrap"><table>
+    <caption class="sans" style="text-align:left;color:var(--muted);padding-bottom:.5rem">Ahorro anual, en USD, por volumen mensual y puntos base de mejora</caption>
+    <thead><tr><th scope="col">Volumen mensual</th><th scope="col" class="num">5 bps</th><th scope="col" class="num">10 bps</th><th scope="col" class="num">25 bps</th><th scope="col" class="num">50 bps</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">USD 1 millón</th><td class="num">6,000</td><td class="num">12,000</td><td class="num">30,000</td><td class="num">60,000</td></tr>
+      <tr><th scope="row">USD 5 millones</th><td class="num">30,000</td><td class="num">60,000</td><td class="num">150,000</td><td class="num">300,000</td></tr>
+      <tr><th scope="row">USD 20 millones</th><td class="num">120,000</td><td class="num">240,000</td><td class="num">600,000</td><td class="num">1,200,000</td></tr>
+      <tr><th scope="row">USD 50 millones</th><td class="num">300,000</td><td class="num">600,000</td><td class="num">1,500,000</td><td class="num">3,000,000</td></tr>
+    </tbody>
+  </table></div>
+  <p>Contra ese ahorro, cuente el costo del cambio: tiempo de ingeniería, alta y cumplimiento con una nueva contraparte, y las semanas de operar con dos proveedores a la vez. A USD 1 millón al mes, diez puntos base rara vez lo cubren. A USD 20 millones, cinco pueden bastar. Mismos puntos base, decisiones opuestas.</p>
+
+  <h2>Siete cosas que pedir, para que las cotizaciones se alineen</h2>
+  <p>Pida lo mismo a todos los proveedores, el mismo día, por el mismo monto. Si cada uno responde en un formato distinto, no tiene nada que comparar.</p>
+  <ol class="steps">
+    <li>El tipo de cambio de mercado y el spread, por separado. No un solo número ciego.</li>
+    <li>El costo all-in en puntos base contra ese tipo de mercado.</li>
+    <li>Si las comisiones de red y de fiat van dentro del número o se cobran aparte.</li>
+    <li>Si el precio es en firme, y por cuánto tiempo, o solo indicativo.</li>
+    <li>Hasta qué monto se sostiene sin moverse.</li>
+    <li>Cuándo liquida, T+2, T+1 o minutos, y cuánto efectivo queda en tránsito mientras tanto.</li>
+    <li>Cómo cambia fuera del horario de Nueva York y en fin de semana. <a href="liquidez-del-peso-hora-por-hora.html">El artículo 03</a> trata de eso.</li>
+  </ol>
+  <p>Una cotización que no se puede separar en tipo de mercado más spread no es comparable con ninguna otra. Punto.</p>
+
+  <h2>Qué cambia con Rio</h2>
+  <p>Cuatro cosas, y las cuatro las puede comprobar con la medición de arriba.</p>
+  <p><strong>Un solo número.</strong> Cada cotización es un precio all-in contra el tipo de cambio de mercado en vivo, con el tipo de mercado y el spread mostrados por separado. Sin comisión de taker, sin comisión de fiat aparte. El spread de la cotización es el costo completo.</p>
+  <p><strong>En firme por el monto completo.</strong> La cotización puede ejecutarse por el monto cotizado durante unos diez segundos. Sin recotización al confirmar, sin last look.</p>
+  <p><strong>Un dígito en volumen institucional.</strong> Los clientes más grandes de Rio operan en un dígito de puntos base contra el tipo de mercado. El precio se acuerda por volumen y corredor, no se publica como tarifa.</p>
+  <p><strong>Minutos, no T+2.</strong> De stablecoin a pesos por SPEI, o de pesos a stablecoin, en uno a dos minutos, los siete días de la semana. El dinero en tránsito sale de su balance.</p>
+  <p>Para tickets grandes o fechas de pago conocidas hay además ejecución TWAP, forwards y un sobregiro que le permite liquidar su lado hasta tres días después de recibir la moneda local. Detalles en la <a href="https://docs.rio.trade">documentación para desarrolladores</a>.</p>
+
+  <section class="faq" aria-labelledby="faq">
+    <h2 id="faq">Preguntas frecuentes</h2>
+    <h3>¿Qué es un punto base?</h3>
+    <p>Una centésima de uno por ciento. Cien puntos base son uno por ciento. Sobre un millón de dólares, un punto base son cien dólares. El FX institucional se negocia en puntos base y no en porcentajes porque a USD 20 millones al mes, la diferencia entre 5 y 25 puntos base son USD 480 mil al año.</p>
+    <h3>¿Cómo calculo el costo all-in de una operación?</h3>
+    <p>Divida los pesos que entregó entre los dólares que recibió para obtener el tipo de cambio que realmente obtuvo, y compárelo con el de mercado en el momento de la operación. La diferencia, en puntos base, es su costo all-in. Use la hora exacta de ejecución, no el cierre del día.</p>
+    <h3>¿Por qué mi banco y mi proveedor me muestran el mismo tipo de cambio?</h3>
+    <p>Porque casi con seguridad le están mostrando una referencia del día, no el precio al que ejecutaron. Dos contrapartes independientes casi nunca ejecutan al mismo precio hasta el cuarto decimal. Tipos de cambio idénticos significan una cotización pasada de mano en mano, no competencia.</p>
+    <h3>¿El efectivo en tránsito es un costo real?</h3>
+    <p>Sí. Un ciclo de liquidación de dos días sobre un flujo recurrente mantiene un saldo permanente fuera de su capital de trabajo, y le deja a usted el riesgo cambiario entre la orden y la liquidación. El costo es invisible solo porque se paga en oportunidad perdida y no en comisiones.</p>
+    <h3>¿Rio publica sus spreads?</h3>
+    <p>No. El precio depende del volumen, del corredor y de las condiciones de mercado en el momento de la operación, así que una tarifa publicada engañaría. Lo que Rio sí le da es el tipo de cambio de mercado y el spread por separado en cada cotización, que es lo único que hace comparable a un proveedor con otro.</p>
+  </section>
+  <section class="about" aria-labelledby="sobre">
+    <h2 id="sobre">Sobre Rio</h2>
+    <p>Rio es infraestructura de FX con stablecoins para América Latina. Ofrece liquidez, conversión y dispersión a rieles locales en México, Colombia y Perú para fintechs y empresas, con cotización all-in contra el tipo de cambio de mercado, precio en firme por el monto completo y liquidación en minutos. Rio maneja más de USD 8 mil millones de volumen anualizado.</p>
+    <!-- GATE: párrafo legal pendiente de Luis -->
+    <p class="legal">En México, los servicios de FX los presta Rampa Blockchain, S.A.P.I. de C.V. Rio es una empresa de tecnología, no un banco, y no capta depósitos.</p>
+  </section>
+
+  <h2>Relacionados</h2>
+  <ul class="related">
+    <li><a href="anatomia-operacion-usdc-a-pesos.html"><span>01</span>Anatomía de una operación de USD 10 millones de USDC a pesos</a></li>
+    <li><a href="liquidez-del-peso-hora-por-hora.html"><span>03</span>Liquidez del peso hora por hora: por qué el viernes a las 5pm cuesta más</a></li>
+    <li><a href="spei-vs-spid-rieles-mexico.html"><span>04</span>SPEI vs SPID: cómo se mueven los pesos y los dólares dentro de México</a></li>
+  </ul>
+  <aside class="cta">
+    <p>Precios en firme, liquidados en minutos. USDC y USDT contra MXN, COP y PEN, 24/7.</p>
+    <a class="btn" href="../../contact.html">Hablar con Rio</a>
+  </aside>
+  <p class="updated">Última actualización: <time datetime="2026-10-01">1 de octubre de 2026</time></p>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-brand">
+        <div class="footer-logo"><img src="../../assets/rio-logo.png" alt="Rio" /></div>
+        <p>FX infrastructure for Latin America. Liquidity, payments, and accounts for fintechs and enterprises.</p>
+      </div>
+      <div class="f-col">
+        <h5>Product &amp; company</h5>
+        <div class="links">
+          <a href="../../developers.html">Developers</a>
+          <a href="../../about.html">About</a>
+          <a href="../../blog.html">Blog</a>
+          <a href="../../contact.html">Contact</a>
+          <a href="https://app.rio.trade/en/login">Log In</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Products</h5>
+        <div class="links">
+          <a href="../../fx.html">FX &amp; Liquidity</a>
+          <a href="../../payments.html">Cross-border Payments</a>
+          <a href="../../accounts.html">Virtual Accounts</a>
+        </div>
+      </div>
+      <div class="f-legal">
+        <h5>Legal</h5>
+        <div class="links row">
+          <a href="../../legal.html">Terms &amp; Conditions</a>
+          <a href="../../legal.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="f-base">
+        <span>© 2026 Rio</span>
+        <a href="mailto:hello@rio.trade">hello@rio.trade</a>
+        <span>FX infrastructure for Latin America</span>
+      </div>
+      <div class="f-disclaimer">
+        <div class="f-dcol">
+          <h5>Legal entities</h5>
+          <p>Rio is a brand of Rampa Holdings Limited and its group entities. Rio is a technology company, not a bank, and does not take deposits. Services are provided by the Rio group entity identified in your agreement: FX services in Mexico are provided by Rampa Blockchain, S.A.P.I. de C.V., which performs operations with virtual assets as a vulnerable activity under Article 17, Section XVI of the Mexican LFPIORPI; services in Peru are provided by Rampa Machu S.A.C.; payment services in Colombia are provided by Rampa Colombia S.A.S. (NIT 901.700.811-9); digital-asset trading for eligible international clients is provided by Rampa Labs Inc., a Money Services Business registered with FinCEN, acting as principal. Digital assets, including stablecoins, are not legal tender, are not backed or guaranteed by any government, and are not FDIC- or SIPC-insured. Cross-border Payments and Virtual Accounts have not launched and are subject to regulatory approvals. Nothing on this site is an offer to any person in a jurisdiction where such offer would be unlawful. See <a href="../../legal.html">Terms &amp; Conditions</a>.</p>
+        </div>
+        <div class="f-dcol">
+          <h5>Availability &amp; product status</h5>
+          <p><span class="mk">*</span> Live markets are available to eligible business clients onboarded by the relevant Rio group entity, subject to eligibility, onboarding and applicable law. Products and services are not available in all jurisdictions. <span class="mk">**</span> Beta refers to a pre-launch program: joining the beta waitlist does not open an account or create any right to receive services. Features are shown for illustration and remain subject to the licenses, registrations and regulatory approvals applicable in each jurisdiction. The regulated provider of each service will be identified at launch. USD accounts are expected to be provided by a regulated U.S. financial institution; stablecoin wallets are expected to be self-custodial &mdash; Rio will not hold your private keys. <span class="mk">&dagger;</span> Planned. Not currently offered. Launch in each jurisdiction is subject to applicable licenses, registrations and regulatory approvals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/rio.js?v=13"></script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Liquidez del peso hora por hora: por qué el FX fuera de horario y en fin de semana cuesta más | Rio</title>
+<meta name="description" content="El peso se opera 24/7 pero no es líquido 24/7. Una semana de liquidez del peso en horario de Nueva York, qué pasa con los spreads después de las 5pm y en fin de semana, y cómo planear alrededor de eso." />
+<link rel="icon" href="../../assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/rio.css?v=33" />
+<link rel="canonical" href="https://www.rio.trade/es/blog/liquidez-del-peso-hora-por-hora">
+<link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/liquidez-del-peso-hora-por-hora">
+<link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/mxn-liquidity-by-the-hour">
+<link rel="alternate" hreflang="x-default" href="https://www.rio.trade/blog/mxn-liquidity-by-the-hour">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Liquidez del peso hora por hora: por qué el FX fuera de horario y en fin de semana cuesta más | Rio">
+<meta property="og:description" content="El peso se opera 24/7 pero no es líquido 24/7. Una semana de liquidez del peso en horario de Nueva York, qué pasa con los spreads después de las 5pm y en fin de semana, y cómo planear alrededor de eso.">
+<meta property="og:url" content="https://www.rio.trade/es/blog/liquidez-del-peso-hora-por-hora">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Liquidez del peso hora por hora: por qué el viernes a las 5pm cuesta más, y qué puede hacer una tesorería al respecto", "description": "El peso se opera 24/7 pero no es líquido 24/7. Una semana de liquidez del peso en horario de Nueva York, qué pasa con los spreads después de las 5pm y en fin de semana, y cómo planear alrededor de eso.", "inLanguage": "es-MX", "articleSection": "Liquidez", "url": "https://www.rio.trade/es/blog/liquidez-del-peso-hora-por-hora", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "es-MX", "mainEntity": [{"@type": "Question", "name": "¿El mercado de FX cierra en algún momento?", "acceptedAnswer": {"@type": "Answer", "text": "El interbancario sí. La operación corre de forma continua desde la apertura del domingo por la noche en Asia hasta el cierre del viernes por la noche en Nueva York, con cada región pasándole el relevo a la siguiente. Durante el fin de semana prácticamente no hay operación interbancaria ni precio en vivo de USD/MXN. Mesas como Rio siguen cotizando, pero el precio refleja el riesgo de mantener la posición hasta que el mercado reabra."}}, {"@type": "Question", "name": "¿Por qué el peso es más barato de operar a unas horas que a otras?", "acceptedAnswer": {"@type": "Answer", "text": "Porque el costo de convertir una divisa depende de cuántos formadores de mercado compiten por cotizarla en ese momento. En la mañana de Nueva York, con Londres aún abierto, la mayor cantidad de mesas está activa en pesos y el spread es el más estrecho. Después del cierre estadounidense, menos mesas cotizan, cada una carga más riesgo, y el precio lo refleja."}}, {"@type": "Question", "name": "¿Cuál es la peor hora del día para operar pesos?", "acceptedAnswer": {"@type": "Answer", "text": "Aproximadamente de 5pm a 7pm hora de Nueva York, después del cierre estadounidense y antes de que abra Tokio. También es cuando una noticia sorpresiva mueve más el precio, porque hay menos jugadores para absorberla. Para una divisa tan atada al dólar como el peso, el cierre estadounidense importa más que para un par con un mercado asiático profundo."}}, {"@type": "Question", "name": "¿Puedo evitar por completo el precio de fin de semana y festivos?", "acceptedAnswer": {"@type": "Answer", "text": "Con frecuencia. Si el pago del fin de semana es predecible, fije el tipo de cambio con un forward durante la ventana líquida con valor en fin de semana. Si los dólares no llegarán hasta el lunes, use un sobregiro para fondear el pago el viernes y liquidar hasta tres días después. Si el flujo es continuo, trabájelo en la ventana líquida con un TWAP. Los festivos de México o Estados Unidos se comportan como fines de semana para el precio. Lo que no puede evitar es una conversión imprevista un sábado, y para eso la única protección es un proveedor que le muestre el precio de fin de semana antes de que usted lo acepte."}}, {"@type": "Question", "name": "¿SPEI funciona los fines de semana?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. SPEI opera las 24 horas, todos los días, con ventanas de mantenimiento programado que Banco de México anuncia con anticipación. Los pesos enviados por SPEI un sábado se acreditan en segundos. El límite del FX en fin de semana es el precio de la conversión, no el riel."}}]}</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="../../index.html"><img src="../../assets/rio-logo.png" alt="Rio" /></a>
+    <div class="nav-links">
+      <div class="dd">
+        <button type="button">Products <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../../fx.html"><div><div class="t">FX &amp; Liquidity <span class="badge live">Live</span></div><div class="d">Stablecoins against LatAm currencies</div></div></a>
+          <a class="dd-item" href="../../payments.html"><div><div class="t">Cross-border Payments <span class="badge now">Beta</span></div><div class="d">Move money in and out of Latin America</div></div></a>
+          <a class="dd-item" href="../../accounts.html"><div><div class="t">Virtual Accounts <span class="badge now">Beta</span></div><div class="d">Stablecoin wallets &amp; USD accounts in beta, LatAm soon</div></div></a>
+        </div>
+      </div>
+      <a href="../../developers.html">Developers</a>
+      <a href="../../about.html">About</a>
+      <div class="dd">
+        <button type="button">Resources <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../../blog.html"><div><div class="t">Blog</div><div class="d">Notes on FX, liquidity and rails in LatAm</div></div></a>
+          <a class="dd-item" href="../../contact.html"><div><div class="t">Contact</div><div class="d">Talk to the team about your flows</div></div></a>
+          <a class="dd-item" href="../../legal.html"><div><div class="t">Legal</div><div class="d">Terms, privacy and sanctions by jurisdiction</div></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-cta" href="https://app.rio.trade/en/login">Log In</a>
+  </div>
+</nav>
+
+<header class="page-hero post-hero">
+  <div class="container">
+    <div class="eyebrow rv"><span class="idx">03 / 04</span> Serie corredor MXN</div>
+    <h1 class="rv d1">Liquidez del peso hora por hora: por qué el viernes a las 5pm cuesta más, y qué puede hacer una tesorería al respecto</h1>
+    <p class="sub rv d2">Usted puede operar el peso a cualquier hora. No puede operarlo bien a cualquier hora. Entre esas dos frases hay un costo que la mayoría de las tesorerías paga cada semana sin verlo.</p>
+    <div class="post-meta rv d3">
+      <div class="byline">
+        <div class="avatar" aria-hidden="true">GO</div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth en Rio<br>Liquidez, <time datetime="2026-10-01">1 de octubre de 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">7 min de lectura</span></div>
+      </div>
+      <div class="post-tools">
+        <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="../mxn-liquidity-by-the-hour.html" hreflang="en" lang="en">EN</a><a href="liquidez-del-peso-hora-por-hora.html" hreflang="es-MX" lang="es" aria-current="true">ES</a></span>
+        <button class="share" type="button" onclick="navigator.share?navigator.share({title:document.title,url:location.href}):navigator.clipboard.writeText(location.href)">Compartir</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+<article class="post">
+  <section class="keynum" aria-label="Empiece con una semana">
+    <p class="big">El peso se opera <b>24/7</b>. La gente que le pone precio trabaja en horario de Nueva York.</p>
+    <p class="small">El riel que mueve los pesos, SPEI, tampoco cierra. Así que la demanda de pesos un sábado es real. La oferta de pesos a un precio justo un sábado no lo es. Si alguna parte de su flujo hacia o desde México se opera fuera del horario laboral estadounidense, esto trata de lo que eso cuesta, y de cómo dejar de pagarlo.</p>
+  </section>
+
+  <h2>Una semana en la liquidez del peso</h2>
+  <p>El FX no tiene campana de cierre, pero la liquidez no tiene que ver con el reloj. Tiene que ver con quién está en su escritorio. El peso es un mercado de dólares: el 98% se opera contra el USD, el 82% fuera de México, sobre todo en Nueva York y Londres. Siga una semana, hora de Nueva York.</p>
+  <!-- Espacio para el diagrama: rio-blog-03-liquidity-clock.svg inline. El mismo contenido está en la lista de abajo. -->
+  <section class="week" aria-label="Una semana de liquidez del peso, hora de Nueva York">
+  <ol class="timeline">
+    <li><time>Domingo, 5pm</time><p>Abre Asia. El mercado interbancario revive después del fin de semana. Delgado, pero vuelve a haber un precio en vivo.</p></li>
+    <li><time>Lunes a viernes, 8am a mediodía</time><p>Londres y Nueva York trabajan al mismo tiempo. La mayor cantidad de mesas cotiza pesos. Aquí el mercado es más profundo y los spreads son más estrechos. Si puede elegir cuándo operar, elija aquí.</p></li>
+    <li><time>Entre semana, mediodía a 5pm</time><p>Londres se va a casa. Nueva York carga el peso sola. Sigue líquido, un poco menos cada hora.</p></li>
+    <li class="thin"><time>Entre semana, 5pm a 7pm</time><p>La costura. Nueva York cerró y Tokio no ha abierto. Ningún lado del mundo está trabajando a plena capacidad. Es el tramo más delgado del día laboral, y en el que una noticia sorpresiva mueve más el precio, porque no hay quién la absorba.</p></li>
+    <li class="closed"><time>Viernes 5pm a domingo 5pm</time><p>El mercado interbancario está cerrado. No existe ningún precio en vivo de USD/MXN. Quien le cotiza pesos un sábado está tomando una posición sobre dónde reabrirá el mercado y carga con ese riesgo hasta que lo haga.</p></li>
+  </ol>
+  </section>
+  <p>Nada de esto es exclusivo de México. Lo que sí es exclusivo de México es el riel de pesos que está debajo. <a href="spei-vs-spid-rieles-mexico.html">SPEI funciona las 24 horas y liquida en segundos</a>, así que el lado de pagos de su negocio nunca se detiene. Solo el lado del precio.</p>
+
+  <h2>Qué cuestan las horas delgadas</h2>
+  <p><strong>Un spread más amplio.</strong> Los formadores de mercado cotizan la liquidez según el riesgo. Menos jugadores para tomar el otro lado, más difícil cubrirse, así que el spread se abre para compensar. El mismo ticket de USD 2 millones que se cruza estrecho a las 10am de un martes se cruza más amplio a las 6pm de un viernes.</p>
+  <p><strong>Menos probabilidad de que lo llenen.</strong> En mercados delgados, el precio que ve y el precio que obtiene se separan con más frecuencia. En plataformas con last look, la práctica de rechazar una operación después de que usted la aceptó, los rechazos suben con la volatilidad, y la volatilidad sube cuando la profundidad baja. Así que la operación que más necesita concretar es la que más probablemente le rebotan y le recotizan peor.</p>
+  <p><strong>Un calendario que usted no eligió.</strong> Las tesorerías que entienden los dos primeros empiezan a agrupar sus conversiones dentro de la ventana líquida. Razonable, salvo que ahora el mercado fija el calendario de pagos en lugar del negocio. Una remesadora no debería tener que pensar en el horario de Nueva York para decidir cuándo fondear los pagos del sábado.</p>
+
+  <h2>De dónde sale el precio del fin de semana</h2>
+  <p>Un proveedor que cotiza en sábado no está siendo generoso ni abusivo. Está cargando riesgo cambiario por usted durante hasta dos días y cobrando por ello. Ese riesgo es real y le corresponde estar en el precio.</p>
+  <p>La forma honesta de manejarlo no es fingir que el precio del sábado es el del martes. Es mostrar el precio del fin de semana como lo que es, antes de operar, para que usted decida si el pago tiene que salir ahora o puede esperar a la apertura del domingo.</p>
+
+  <h2>Cómo cotiza y liquida Rio las 24 horas</h2>
+  <!-- GATE G1: visto bueno de la mesa — el artículo dice que los spreads son más amplios fuera de horario, nunca cuánto. GATE G2: confirmar cotización y liquidación en fines de semana y festivos MX/US. -->
+  <p>Rio cotiza y liquida USDC y USDT contra MXN las 24 horas, los siete días de la semana, incluidos los festivos de México y Estados Unidos. Tres cosas sobre cómo funciona.</p>
+  <p><strong>La cotización le dice qué hora es.</strong> Cada cotización es un precio all-in contra el tipo de cambio de mercado en vivo, en firme por el monto completo durante unos diez segundos, con el spread mostrado por separado. Fuera de horario y en fin de semana ese spread es más amplio, porque el mercado es más delgado, y usted lo ve en la cotización antes de aceptar, no en el estado de cuenta después. Sin last look, así que una cotización aceptada es una operación que se ejecuta.</p>
+  <p><strong>La liquidación no espera al lunes.</strong> Los pesos llegan por SPEI en uno a dos minutos a cualquier hora. Que el mercado interbancario esté cerrado afecta el precio de la conversión, no la entrega de los pesos.</p>
+  <p><strong>Puede saltarse las horas delgadas por completo.</strong> Si el viernes por la mañana ya sabe lo que pagará el sábado, fije el tipo de cambio con un forward con valor el sábado. Si sus entradas son grandes y continuas, trabájelas durante la ventana líquida con un TWAP en vez de cruzar un bloque a las 6pm. Si necesita pagar antes de que lleguen sus dólares, el sobregiro de Rio le permite fondear el pago en la ventana líquida y liquidar su lado hasta tres días después.</p>
+  <p>Una más. Cuando los propios clientes de Rio tienen flujo en ambas direcciones, uno vendiendo pesos mientras otro compra, la mesa puede cruzarlos y cotizar muy por dentro del spread de mercado de ese momento. Esos avisos de axe valen más justo cuando el mercado externo está más delgado.</p>
+
+  <h2>La pregunta para su proveedor actual</h2>
+  <p>No "cuál es su spread". Pregunte: "¿cuál fue mi spread el viernes pasado a las 6pm?" Si la respuesta es el mismo número que el martes a las 10am, una de dos cosas es cierta. O el proveedor se está comiendo el costo de las horas fuera de mercado, lo cual no va a durar, o el número del martes nunca fue tan estrecho como parecía. <a href="costo-real-fx-pesos-dolares.html">El artículo 02 de esta serie</a> muestra cómo medirlo usted mismo.</p>
+
+  <section class="faq" aria-labelledby="faq">
+    <h2 id="faq">Preguntas frecuentes</h2>
+    <h3>¿El mercado de FX cierra en algún momento?</h3>
+    <p>El interbancario sí. La operación corre de forma continua desde la apertura del domingo por la noche en Asia hasta el cierre del viernes por la noche en Nueva York, con cada región pasándole el relevo a la siguiente. Durante el fin de semana prácticamente no hay operación interbancaria ni precio en vivo de USD/MXN. Mesas como Rio siguen cotizando, pero el precio refleja el riesgo de mantener la posición hasta que el mercado reabra.</p>
+    <h3>¿Por qué el peso es más barato de operar a unas horas que a otras?</h3>
+    <p>Porque el costo de convertir una divisa depende de cuántos formadores de mercado compiten por cotizarla en ese momento. En la mañana de Nueva York, con Londres aún abierto, la mayor cantidad de mesas está activa en pesos y el spread es el más estrecho. Después del cierre estadounidense, menos mesas cotizan, cada una carga más riesgo, y el precio lo refleja.</p>
+    <h3>¿Cuál es la peor hora del día para operar pesos?</h3>
+    <p>Aproximadamente de 5pm a 7pm hora de Nueva York, después del cierre estadounidense y antes de que abra Tokio. También es cuando una noticia sorpresiva mueve más el precio, porque hay menos jugadores para absorberla. Para una divisa tan atada al dólar como el peso, el cierre estadounidense importa más que para un par con un mercado asiático profundo.</p>
+    <h3>¿Puedo evitar por completo el precio de fin de semana y festivos?</h3>
+    <p>Con frecuencia. Si el pago del fin de semana es predecible, fije el tipo de cambio con un forward durante la ventana líquida con valor en fin de semana. Si los dólares no llegarán hasta el lunes, use un sobregiro para fondear el pago el viernes y liquidar hasta tres días después. Si el flujo es continuo, trabájelo en la ventana líquida con un TWAP. Los festivos de México o Estados Unidos se comportan como fines de semana para el precio. Lo que no puede evitar es una conversión imprevista un sábado, y para eso la única protección es un proveedor que le muestre el precio de fin de semana antes de que usted lo acepte.</p>
+    <h3>¿SPEI funciona los fines de semana?</h3>
+    <p>Sí. SPEI opera las 24 horas, todos los días, con ventanas de mantenimiento programado que Banco de México anuncia con anticipación. Los pesos enviados por SPEI un sábado se acreditan en segundos. El límite del FX en fin de semana es el precio de la conversión, no el riel.</p>
+  </section>
+  <section class="about" aria-labelledby="sobre">
+    <h2 id="sobre">Sobre Rio</h2>
+    <p>Rio es infraestructura de FX con stablecoins para América Latina. Ofrece liquidez, conversión y dispersión a rieles locales en México, Colombia y Perú para fintechs y empresas, con cotización all-in contra el tipo de cambio de mercado, precio en firme por el monto completo y liquidación en minutos. Rio maneja más de USD 8 mil millones de volumen anualizado.</p>
+    <!-- GATE: párrafo legal pendiente de Luis -->
+    <p class="legal">En México, los servicios de FX los presta Rampa Blockchain, S.A.P.I. de C.V. Rio es una empresa de tecnología, no un banco, y no capta depósitos.</p>
+  </section>
+
+  <h2>Relacionados</h2>
+  <ul class="related">
+    <li><a href="anatomia-operacion-usdc-a-pesos.html"><span>01</span>Anatomía de una operación de USD 10 millones de USDC a pesos</a></li>
+    <li><a href="costo-real-fx-pesos-dolares.html"><span>02</span>El costo real de su FX en pesos: cómo medir lo que paga hoy</a></li>
+    <li><a href="spei-vs-spid-rieles-mexico.html"><span>04</span>SPEI vs SPID: cómo se mueven los pesos y los dólares dentro de México</a></li>
+  </ul>
+  <aside class="cta">
+    <p>Precios en firme, liquidados en minutos. USDC y USDT contra MXN, COP y PEN, 24/7.</p>
+    <a class="btn" href="../../contact.html">Hablar con Rio</a>
+  </aside>
+  <p class="updated">Última actualización: <time datetime="2026-10-01">1 de octubre de 2026</time></p>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-brand">
+        <div class="footer-logo"><img src="../../assets/rio-logo.png" alt="Rio" /></div>
+        <p>FX infrastructure for Latin America. Liquidity, payments, and accounts for fintechs and enterprises.</p>
+      </div>
+      <div class="f-col">
+        <h5>Product &amp; company</h5>
+        <div class="links">
+          <a href="../../developers.html">Developers</a>
+          <a href="../../about.html">About</a>
+          <a href="../../blog.html">Blog</a>
+          <a href="../../contact.html">Contact</a>
+          <a href="https://app.rio.trade/en/login">Log In</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Products</h5>
+        <div class="links">
+          <a href="../../fx.html">FX &amp; Liquidity</a>
+          <a href="../../payments.html">Cross-border Payments</a>
+          <a href="../../accounts.html">Virtual Accounts</a>
+        </div>
+      </div>
+      <div class="f-legal">
+        <h5>Legal</h5>
+        <div class="links row">
+          <a href="../../legal.html">Terms &amp; Conditions</a>
+          <a href="../../legal.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="f-base">
+        <span>© 2026 Rio</span>
+        <a href="mailto:hello@rio.trade">hello@rio.trade</a>
+        <span>FX infrastructure for Latin America</span>
+      </div>
+      <div class="f-disclaimer">
+        <div class="f-dcol">
+          <h5>Legal entities</h5>
+          <p>Rio is a brand of Rampa Holdings Limited and its group entities. Rio is a technology company, not a bank, and does not take deposits. Services are provided by the Rio group entity identified in your agreement: FX services in Mexico are provided by Rampa Blockchain, S.A.P.I. de C.V., which performs operations with virtual assets as a vulnerable activity under Article 17, Section XVI of the Mexican LFPIORPI; services in Peru are provided by Rampa Machu S.A.C.; payment services in Colombia are provided by Rampa Colombia S.A.S. (NIT 901.700.811-9); digital-asset trading for eligible international clients is provided by Rampa Labs Inc., a Money Services Business registered with FinCEN, acting as principal. Digital assets, including stablecoins, are not legal tender, are not backed or guaranteed by any government, and are not FDIC- or SIPC-insured. Cross-border Payments and Virtual Accounts have not launched and are subject to regulatory approvals. Nothing on this site is an offer to any person in a jurisdiction where such offer would be unlawful. See <a href="../../legal.html">Terms &amp; Conditions</a>.</p>
+        </div>
+        <div class="f-dcol">
+          <h5>Availability &amp; product status</h5>
+          <p><span class="mk">*</span> Live markets are available to eligible business clients onboarded by the relevant Rio group entity, subject to eligibility, onboarding and applicable law. Products and services are not available in all jurisdictions. <span class="mk">**</span> Beta refers to a pre-launch program: joining the beta waitlist does not open an account or create any right to receive services. Features are shown for illustration and remain subject to the licenses, registrations and regulatory approvals applicable in each jurisdiction. The regulated provider of each service will be identified at launch. USD accounts are expected to be provided by a regulated U.S. financial institution; stablecoin wallets are expected to be self-custodial &mdash; Rio will not hold your private keys. <span class="mk">&dagger;</span> Planned. Not currently offered. Launch in each jurisdiction is subject to applicable licenses, registrations and regulatory approvals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../../assets/rio.js?v=13"></script>
+</body>
+</html>

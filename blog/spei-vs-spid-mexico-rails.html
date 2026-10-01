@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SPEI vs SPID: How Pesos and Dollars Move Inside Mexico, and Where Stablecoins Fit | Rio</title>
+<meta name="description" content="Mexico&#x27;s two payment rails explained for treasuries. SPEI for pesos (24/7, seconds), SPID for dollars between Mexican bank accounts (companies only, 08:00 to 14:15), CLABE, cut-offs, and how Rio connects both to stablecoin networks." />
+<link rel="icon" href="../assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../assets/rio.css?v=33" />
+<link rel="canonical" href="https://www.rio.trade/blog/spei-vs-spid-mexico-rails">
+<link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/spei-vs-spid-mexico-rails">
+<link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/spei-vs-spid-rieles-mexico">
+<link rel="alternate" hreflang="x-default" href="https://www.rio.trade/blog/spei-vs-spid-mexico-rails">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SPEI vs SPID: How Pesos and Dollars Move Inside Mexico, and Where Stablecoins Fit | Rio">
+<meta property="og:description" content="Mexico&#x27;s two payment rails explained for treasuries. SPEI for pesos (24/7, seconds), SPID for dollars between Mexican bank accounts (companies only, 08:00 to 14:15), CLABE, cut-offs, and how Rio connects both to stablecoin networks.">
+<meta property="og:url" content="https://www.rio.trade/blog/spei-vs-spid-mexico-rails">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SPEI vs SPID: how pesos and dollars actually move inside Mexico, and where stablecoins fit", "description": "Mexico's two payment rails explained for treasuries. SPEI for pesos (24/7, seconds), SPID for dollars between Mexican bank accounts (companies only, 08:00 to 14:15), CLABE, cut-offs, and how Rio connects both to stablecoin networks.", "inLanguage": "en", "articleSection": "Markets", "url": "https://www.rio.trade/blog/spei-vs-spid-mexico-rails", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "What is a CLABE?", "acceptedAnswer": {"@type": "Answer", "text": "The Clave Bancaria Estandarizada, the 18-digit account number used for every SPEI transfer in Mexico. Three digits for the bank, three for the branch, eleven for the account, one check digit. A transfer to a CLABE that does not exist, or whose holder does not match, is rejected by the receiving bank and returned. A retry, not a loss."}}, {"@type": "Question", "name": "Does a wire from the United States to Mexico go through SPID?", "acceptedAnswer": {"@type": "Answer", "text": "No. SPID only moves dollars between dollar accounts at Mexican banks, and only for companies domiciled in Mexico. A cross-border wire is converted to pesos by the banks along the way and lands in a Mexican peso account, from where it moves over SPEI."}}, {"@type": "Question", "name": "Can Rio pay me in dollars inside Mexico?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. If your company has a dollar account at a Mexican bank, you can trade pesos to dollars, settle the pesos over SPEI, and receive the dollars over SPID into the Mexican dollar account you whitelisted. The reverse works too: fund a dollars-to-pesos trade over SPID and receive pesos over SPEI. SPID payouts and funding are limited to business days, 08:00 to 14:15."}}, {"@type": "Question", "name": "What happens if a SPID payment misses the cut-off?", "acceptedAnswer": {"@type": "Answer", "text": "It waits for the next business day. There is no after-hours window and no central-bank dollar liquidity in SPID. If you need the other side sooner, settle on-chain instead, which has no cut-off, or use Rio's overdraft so the payout goes today and you settle up to three days later."}}, {"@type": "Question", "name": "What do I need to whitelist before trading?", "acceptedAnswer": {"@type": "Answer", "text": "The destinations Rio will pay out to: one or more CLABEs for pesos, a Mexican dollar account if you use SPID payouts, and a wallet address per network for USDC or USDT. Payouts only ever go to whitelisted destinations, which is what lets them run automatically the moment your settlement arrives."}}]}</script>
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="../index.html"><img src="../assets/rio-logo.png" alt="Rio" /></a>
+    <div class="nav-links">
+      <div class="dd">
+        <button type="button">Products <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../fx.html"><div><div class="t">FX &amp; Liquidity <span class="badge live">Live</span></div><div class="d">Stablecoins against LatAm currencies</div></div></a>
+          <a class="dd-item" href="../payments.html"><div><div class="t">Cross-border Payments <span class="badge now">Beta</span></div><div class="d">Move money in and out of Latin America</div></div></a>
+          <a class="dd-item" href="../accounts.html"><div><div class="t">Virtual Accounts <span class="badge now">Beta</span></div><div class="d">Stablecoin wallets &amp; USD accounts in beta, LatAm soon</div></div></a>
+        </div>
+      </div>
+      <a href="../developers.html">Developers</a>
+      <a href="../about.html">About</a>
+      <div class="dd">
+        <button type="button">Resources <span class="chev">▾</span></button>
+        <div class="dd-menu">
+          <a class="dd-item" href="../blog.html"><div><div class="t">Blog</div><div class="d">Notes on FX, liquidity and rails in LatAm</div></div></a>
+          <a class="dd-item" href="../contact.html"><div><div class="t">Contact</div><div class="d">Talk to the team about your flows</div></div></a>
+          <a class="dd-item" href="../legal.html"><div><div class="t">Legal</div><div class="d">Terms, privacy and sanctions by jurisdiction</div></div></a>
+        </div>
+      </div>
+    </div>
+    <div class="nav-spacer"></div>
+    <a class="nav-cta" href="https://app.rio.trade/en/login">Log In</a>
+  </div>
+</nav>
+
+<header class="page-hero post-hero">
+  <div class="container">
+    <div class="eyebrow rv"><span class="idx">04 / 04</span> MXN corridor series</div>
+    <h1 class="rv d1">SPEI vs SPID: how pesos and dollars actually move inside Mexico, and where stablecoins fit</h1>
+    <p class="sub rv d2">Mexico has one of the best instant-payment systems in the world for its own currency, and a much narrower one for dollars that most people outside Mexico have never heard of. What each does, what each cannot do, and how Rio plugs into both.</p>
+    <div class="post-meta rv d3">
+      <div class="byline">
+        <div class="avatar" aria-hidden="true">GO</div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth at Rio<br>Markets, <time datetime="2026-10-01">October 1, 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">7 min read</span></div>
+      </div>
+      <div class="post-tools">
+        <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="spei-vs-spid-mexico-rails.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="es/spei-vs-spid-rieles-mexico.html" hreflang="es-MX" lang="es">ES</a></span>
+        <button class="share" type="button" onclick="navigator.share?navigator.share({title:document.title,url:location.href}):navigator.clipboard.writeText(location.href)">Share</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+<article class="post">
+  <section class="keynum" aria-label="Start with one correction">
+    <p class="big">A wire from a US bank to Mexico <b>does not touch SPID</b>. The dollars get converted on the way and arrive as pesos.</p>
+    <p class="small">SPID only matters when the dollars stay dollars and both accounts are already in Mexico. That one misunderstanding explains most of the confusion about how money moves inside the country, so it goes first.</p>
+  </section>
+
+  <p>This is for treasury, payments and product teams at fintechs, PSPs and remittance companies that hold or move dollars and pesos inside Mexico, and for anyone who wants to know exactly what happens between "I accepted the quote" and "the money is in the account."</p>
+
+  <h2>The two rails side by side</h2>
+  <div class="tablewrap"><table class="compare">
+    <thead><tr><th scope="col"></th><th scope="col">SPEI</th><th scope="col">SPID</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Currency</th><td>Mexican pesos</td><td>US dollars, between accounts at Mexican banks</td></tr>
+      <tr><th scope="row">Run by</th><td>Banco de México</td><td>Banco de México</td></tr>
+      <tr><th scope="row">Hours</th><td>24 hours, every day. Maintenance windows announced in advance.</td><td>Business days only, 08:00 to 14:15 Mexico City time</td></tr>
+      <tr><th scope="row">Speed</th><td>Seconds</td><td>Fast inside the window, but a bank can hold a payment until close of operations for anti-money-laundering checks. Miss the window and it moves the next business day.</td></tr>
+      <tr><th scope="row">Who can use it</th><td>Anyone with an account at a participating bank, via an 18-digit CLABE</td><td>Only companies domiciled in Mexico with a dollar account at a participating bank. No individuals. The bank needs the company's RFC and e.firma on file.</td></tr>
+      <tr><th scope="row">Who participates</th><td>Banks and other regulated institutions</td><td>Banks only. 29 commercial and development banks as of June 2026.</td></tr>
+      <tr><th scope="row">Central-bank liquidity</th><td>Yes, in pesos</td><td>None. Banks fund their dollar obligations through US correspondents.</td></tr>
+      <tr><th scope="row">What it is for</th><td>Payroll, suppliers, remittance payouts, any peso settlement</td><td>Moving dollars between Mexican dollar accounts without sending them abroad: paying a Mexican supplier in dollars, or funding or receiving the dollar side of an onshore FX trade</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2>SPEI: why Mexico settles pesos in seconds</h2>
+  <p>SPEI, the Sistema de Pagos Electrónicos Interbancarios, is Banco de México's real-time system for pesos. It clears transfers between banks in seconds, 24 hours a day, every day of the year. Every account is addressed by an 18-digit CLABE that encodes the bank, the branch and the account. Send to a wrong CLABE and the receiving bank rejects it and sends it back. It is a retry, not a loss.</p>
+  <p>For a treasury, SPEI means the peso side of any Mexico flow has no operational constraint worth planning around. Pesos can go out at 3am on a Sunday and arrive before you close the tab.</p>
+
+  <h2>SPID: the dollar rail inside Mexico</h2>
+  <p>SPID, the Sistema de Pagos Interbancarios en Dólares, moves US dollars between dollar accounts at Mexican banks. It exists because Mexican companies hold dollar accounts onshore, mostly for import and export, and need to pay each other in dollars without routing the money through the United States and back.</p>
+  <p>It comes with four limits. It runs on business days only, 08:00 to 14:15. Only banks participate, and only Mexico-domiciled companies with a dollar account can use it. Banco de México provides no dollar liquidity, so each bank funds its SPID obligations with dollars held at a US correspondent. And even inside the window, a bank can hold a payment until close of operations to finish its anti-money-laundering checks.</p>
+  <p>In practice: a dollar payment between two Mexican accounts instructed on Friday afternoon moves on Monday, and a dollar deposit that lands after the cut-off is valued the next business day.</p>
+
+  <h2>How a trade works at Rio: price, settle, pay out</h2>
+  <p>Rio works in a different order from a bank, and the order matters.</p>
+  <ol class="steps">
+    <li><strong>Lock the price.</strong> You get a quote for the pair and the amount, all-in against the live market rate, with the market rate and the spread shown separately. Firm for the full amount for about ten seconds. Accept it and the trade is booked at that price. <a href="real-cost-of-mxn-fx.html">Piece 02</a> explains why the two numbers matter.</li>
+    <li><strong>Settle.</strong> You send Rio what you sold. Buying pesos: USDC or USDT to Rio's deposit address on the network of your choice, or dollars over SPID from your Mexican dollar account. Selling pesos: pesos over SPEI to Rio's account.</li>
+    <li><strong>Automatic payout.</strong> The moment your settlement lands, Rio pays out what you bought to the destination you whitelisted at onboarding: a CLABE for pesos over SPEI, a Mexican dollar account over SPID, or a wallet for USDC or USDT. No manual step. Seconds on SPEI and on-chain, inside the SPID window for dollars in Mexico.</li>
+  </ol>
+  <!-- GATE G3: first-party alt. Current text says "a CLABE". If third-party payouts are live on publish day, change to "a CLABE in your name or your beneficiaries'". -->
+  <!-- GATE G4: Javi confirms SPID flows as written (USD payout over SPID to a whitelisted Mexican USD account; USD funding over SPID from one). -->
+  <p>Rio is not a direct participant in SPEI or SPID. It settles through its own accounts at regulated Mexican banks, which participate in both.</p>
+  <!-- GATE G1: legal paragraph pending Luis -->
+  <p class="legal">In Mexico, FX services are provided by Rampa Blockchain, S.A.P.I. de C.V., which performs operations with virtual assets as a vulnerable activity under Article 17, Section XVI of the LFPIORPI. Rio is a technology company, not a bank, and does not take deposits.</p>
+
+  <h2>Four flows, one account</h2>
+  <p>Because Rio sits on SPEI, SPID and the stablecoin networks at once, one account covers the combinations a Mexico treasury actually runs.</p>
+  <div class="tablewrap"><table class="flows">
+    <thead><tr><th scope="col">From → to</th><th scope="col">Trade</th><th scope="col">You settle over</th><th scope="col">Rio pays out over</th><th scope="col">Hours</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Dollars abroad → pesos in Mexico</th><td>USDC → MXN</td><td>On-chain</td><td>SPEI</td><td>24/7</td></tr>
+      <tr><th scope="row">Pesos in Mexico → dollars abroad</th><td>MXN → USDC</td><td>SPEI</td><td>Your whitelisted wallet</td><td>24/7</td></tr>
+      <tr><th scope="row">Dollars in Mexico → pesos in Mexico</th><td>USD → MXN</td><td>SPID</td><td>SPEI</td><td>Settlement inside the SPID window; payout instant once it arrives</td></tr>
+      <tr><th scope="row">Pesos in Mexico → dollars in Mexico</th><td>MXN → USD</td><td>SPEI</td><td>SPID</td><td>Payout inside the SPID window</td></tr>
+    </tbody>
+  </table></div>
+  <p>The first two never meet a banking cut-off. The first is the trade in <a href="anatomy-usdc-to-mxn-trade.html">Piece 01</a>. The last two are for companies that keep dollar accounts onshore and want an FX price they can check against the market instead of taking the bank's, with the dollars staying in Mexico.</p>
+
+  <h2>Which network for the stablecoin leg</h2>
+  <p>The FX price is the same on every network. Rio quotes against the market rate regardless of rail. What differs is how fast your settlement confirms and what the network fee is.</p>
+  <!-- GATE G2: Javi confirms the "typical confirmation" column against Rio's deposit-credit policy -->
+  <div class="tablewrap"><table>
+    <thead><tr><th scope="col">Network</th><th scope="col">Stablecoins</th><th scope="col">Typical confirmation</th><th scope="col">Notes</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Solana</th><td>USDC, USDT</td><td>Seconds</td><td>High throughput, very low fee. A common default for payment flows.</td></tr>
+      <tr><th scope="row">Arc</th><td>USDC</td><td>Under one second</td><td>Circle's own network, live since September 2026. Fees paid in USDC. Built for payment finality.</td></tr>
+      <tr><th scope="row">Stellar</th><td>USDC</td><td>Seconds</td><td>Very low fee. Widely used by remittance and payout networks.</td></tr>
+      <tr><th scope="row">Polygon</th><td>USDC, USDT</td><td>Seconds to a minute</td><td>Ethereum-compatible, low fee.</td></tr>
+      <tr><th scope="row">Tron</th><td>USDT</td><td>Seconds to a minute</td><td>The largest USDT network in emerging markets.</td></tr>
+      <tr><th scope="row">Ethereum</th><td>USDC, USDT</td><td>Minutes</td><td>Deepest liquidity for the tokens themselves, highest fee.</td></tr>
+      <tr><th scope="row">Base</th><td>USDC</td><td>Seconds to a minute</td><td>Ethereum-compatible, low fee.</td></tr>
+    </tbody>
+  </table></div>
+  <p>Most treasuries pick the network their counterparties already use rather than optimizing the leg. Whichever network your settlement arrives on, the payout that follows is identical. Addresses and network details are in the <a href="https://docs.rio.trade">developer docs</a>.</p>
+
+  <h2>What this does to your calendar</h2>
+  <p>Keep the dollars inside the banking system and your Mexico flow runs on two clocks: business days for the dollar side, 24/7 for the peso side. Use stablecoins for the dollar side and both sides run 24/7. That is the difference between Friday afternoon conversions waiting for Monday or not, between weekend remittances funded at Friday's rate or Saturday's, and between scheduling your FX around the market or around your business. <a href="mxn-liquidity-by-the-hour.html">Piece 03</a> is about what the peso costs at each of those hours.</p>
+
+  <section class="faq" aria-labelledby="faq">
+    <h2 id="faq">FAQ</h2>
+    <h3>What is a CLABE?</h3>
+    <p>The Clave Bancaria Estandarizada, the 18-digit account number used for every SPEI transfer in Mexico. Three digits for the bank, three for the branch, eleven for the account, one check digit. A transfer to a CLABE that does not exist, or whose holder does not match, is rejected by the receiving bank and returned. A retry, not a loss.</p>
+    <h3>Does a wire from the United States to Mexico go through SPID?</h3>
+    <p>No. SPID only moves dollars between dollar accounts at Mexican banks, and only for companies domiciled in Mexico. A cross-border wire is converted to pesos by the banks along the way and lands in a Mexican peso account, from where it moves over SPEI.</p>
+    <h3>Can Rio pay me in dollars inside Mexico?</h3>
+    <p>Yes. If your company has a dollar account at a Mexican bank, you can trade pesos to dollars, settle the pesos over SPEI, and receive the dollars over SPID into the Mexican dollar account you whitelisted. The reverse works too: fund a dollars-to-pesos trade over SPID and receive pesos over SPEI. SPID payouts and funding are limited to business days, 08:00 to 14:15.</p>
+    <h3>What happens if a SPID payment misses the cut-off?</h3>
+    <p>It waits for the next business day. There is no after-hours window and no central-bank dollar liquidity in SPID. If you need the other side sooner, settle on-chain instead, which has no cut-off, or use Rio's overdraft so the payout goes today and you settle up to three days later.</p>
+    <h3>What do I need to whitelist before trading?</h3>
+    <p>The destinations Rio will pay out to: one or more CLABEs for pesos, a Mexican dollar account if you use SPID payouts, and a wallet address per network for USDC or USDT. Payouts only ever go to whitelisted destinations, which is what lets them run automatically the moment your settlement arrives.</p>
+  </section>
+  <section class="about" aria-labelledby="about">
+    <h2 id="about">About Rio</h2>
+    <p>Rio is stablecoin FX infrastructure for Latin America. It provides liquidity, conversion and payout to local rails in Mexico, Colombia and Peru for fintechs and enterprises, with all-in pricing against the market rate, firm quotes for the full amount and settlement in minutes. Rio runs more than USD 8 billion in annualized volume.</p>
+    <!-- GATE: legal paragraph pending Luis -->
+    <p class="legal">In Mexico, FX services are provided by Rampa Blockchain, S.A.P.I. de C.V. Rio is a technology company, not a bank, and does not take deposits.</p>
+  </section>
+
+  <h2>Related</h2>
+  <ul class="related">
+    <li><a href="anatomy-usdc-to-mxn-trade.html"><span>01</span>Anatomy of a USD 10 million USDC to MXN trade</a></li>
+    <li><a href="real-cost-of-mxn-fx.html"><span>02</span>The real cost of your MXN FX: how to measure what you pay today</a></li>
+    <li><a href="mxn-liquidity-by-the-hour.html"><span>03</span>MXN liquidity by the hour: why Friday at 5pm costs more</a></li>
+  </ul>
+  <aside class="cta">
+    <p>Firm prices, settled in minutes. USDC and USDT against MXN, COP and PEN, 24/7.</p>
+    <a class="btn" href="../contact.html">Talk to Rio</a>
+  </aside>
+  <p class="updated">Last updated: <time datetime="2026-10-01">October 1, 2026</time></p>
+
+</article>
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="f-grid">
+      <div class="f-brand">
+        <div class="footer-logo"><img src="../assets/rio-logo.png" alt="Rio" /></div>
+        <p>FX infrastructure for Latin America. Liquidity, payments, and accounts for fintechs and enterprises.</p>
+      </div>
+      <div class="f-col">
+        <h5>Product &amp; company</h5>
+        <div class="links">
+          <a href="../developers.html">Developers</a>
+          <a href="../about.html">About</a>
+          <a href="../blog.html">Blog</a>
+          <a href="../contact.html">Contact</a>
+          <a href="https://app.rio.trade/en/login">Log In</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h5>Products</h5>
+        <div class="links">
+          <a href="../fx.html">FX &amp; Liquidity</a>
+          <a href="../payments.html">Cross-border Payments</a>
+          <a href="../accounts.html">Virtual Accounts</a>
+        </div>
+      </div>
+      <div class="f-legal">
+        <h5>Legal</h5>
+        <div class="links row">
+          <a href="../legal.html">Terms &amp; Conditions</a>
+          <a href="../legal.html">Privacy Policy</a>
+        </div>
+      </div>
+      <div class="f-base">
+        <span>© 2026 Rio</span>
+        <a href="mailto:hello@rio.trade">hello@rio.trade</a>
+        <span>FX infrastructure for Latin America</span>
+      </div>
+      <div class="f-disclaimer">
+        <div class="f-dcol">
+          <h5>Legal entities</h5>
+          <p>Rio is a brand of Rampa Holdings Limited and its group entities. Rio is a technology company, not a bank, and does not take deposits. Services are provided by the Rio group entity identified in your agreement: FX services in Mexico are provided by Rampa Blockchain, S.A.P.I. de C.V., which performs operations with virtual assets as a vulnerable activity under Article 17, Section XVI of the Mexican LFPIORPI; services in Peru are provided by Rampa Machu S.A.C.; payment services in Colombia are provided by Rampa Colombia S.A.S. (NIT 901.700.811-9); digital-asset trading for eligible international clients is provided by Rampa Labs Inc., a Money Services Business registered with FinCEN, acting as principal. Digital assets, including stablecoins, are not legal tender, are not backed or guaranteed by any government, and are not FDIC- or SIPC-insured. Cross-border Payments and Virtual Accounts have not launched and are subject to regulatory approvals. Nothing on this site is an offer to any person in a jurisdiction where such offer would be unlawful. See <a href="../legal.html">Terms &amp; Conditions</a>.</p>
+        </div>
+        <div class="f-dcol">
+          <h5>Availability &amp; product status</h5>
+          <p><span class="mk">*</span> Live markets are available to eligible business clients onboarded by the relevant Rio group entity, subject to eligibility, onboarding and applicable law. Products and services are not available in all jurisdictions. <span class="mk">**</span> Beta refers to a pre-launch program: joining the beta waitlist does not open an account or create any right to receive services. Features are shown for illustration and remain subject to the licenses, registrations and regulatory approvals applicable in each jurisdiction. The regulated provider of each service will be identified at launch. USD accounts are expected to be provided by a regulated U.S. financial institution; stablecoin wallets are expected to be self-custodial &mdash; Rio will not hold your private keys. <span class="mk">&dagger;</span> Planned. Not currently offered. Launch in each jurisdiction is subject to applicable licenses, registrations and regulatory approvals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="../assets/rio.js?v=13"></script>
+</body>
+</html>
