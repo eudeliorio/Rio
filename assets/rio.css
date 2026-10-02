@@ -411,11 +411,18 @@ img { max-width: 100%; }
 .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 64px; }
 .member { border: 0.5px solid var(--line-strong); border-radius: 18px; padding: 30px; background: #fff; }
 .member .avatar {
-  width: 64px; height: 64px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep);
+  width: 96px; height: 96px; border-radius: 999px; background: var(--accent-soft); color: var(--accent-deep);
   display: flex; align-items: center; justify-content: center;
-  font-weight: 700; font-size: 20px; letter-spacing: .02em; margin-bottom: 18px;
+  font-weight: 700; font-size: 24px; letter-spacing: .02em; margin-bottom: 22px;
 }
-.member h4 { margin: 0 0 4px; font-size: 18px; font-weight: 500; }
+.member .avatar.photo { display: block; object-fit: cover; object-position: 50% 30%; filter: grayscale(1); background: var(--surface); border: 0.5px solid var(--line-strong); }
+.member h4 { margin: 0 0 4px; font-size: 18px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+.member h4 .li {
+  display: inline-flex; width: 24px; height: 24px; border-radius: 7px; align-items: center; justify-content: center;
+  font-size: 12px; color: var(--muted); border: 0.5px solid var(--line-strong); flex: none;
+  transition: color .18s ease, border-color .18s ease, background .18s ease;
+}
+.member h4 .li:hover { color: #fff; background: var(--accent); border-color: var(--accent); }
 .member .role { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .member p { font-size: 14px; color: var(--muted); margin: 12px 0 0; }
 
@@ -606,6 +613,13 @@ img { max-width: 100%; }
   padding: 64px 48px 64px 0;
   border-right: 1px solid rgba(255, 255, 255, 0.08);
 }
+.f-social { display: flex; gap: 10px; margin-top: 28px; }
+.f-social a {
+  width: 36px; height: 36px; border-radius: 999px; border: 1px solid rgba(255,255,255,.14);
+  display: flex; align-items: center; justify-content: center; color: #cbd2e0; font-size: 14px;
+  transition: border-color .18s ease, color .18s ease, background .18s ease;
+}
+.f-social a:hover { color: #fff; border-color: rgba(255,255,255,.5); }
 .f-col { padding: 64px 0 44px 48px; }
 .f-col + .f-col { border-left: 1px solid rgba(255, 255, 255, 0.08); }
 .f-legal {
@@ -689,7 +703,7 @@ img { max-width: 100%; }
 .post-card { display: flex; flex-direction: column; padding-bottom: 36px; border-bottom: 0.5px solid var(--line); }
 .post-card[hidden] { display: none; }
 .post-card .tile {
-  display: block; aspect-ratio: 16 / 10; background: var(--ink); border-radius: 14px; overflow: hidden;
+  display: block; aspect-ratio: 16 / 9; background: var(--ink); border-radius: 14px; overflow: hidden;
 }
 .post-card .tile img { width: 100%; height: 100%; display: block; opacity: .82; transition: opacity .3s ease; }
 .post-card:hover .tile img { opacity: 1; }
@@ -735,6 +749,8 @@ img { max-width: 100%; }
 .share:hover { border-color: var(--ink); }
 .share:focus-visible, .lang-toggle a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+.post-cover { margin: 0 0 8px; border-radius: 18px; overflow: hidden; background: var(--ink); }
+.post-cover img { display: block; width: 100%; height: auto; aspect-ratio: 21 / 9; object-fit: cover; }
 .post { padding: 32px 0 110px; font-size: 17px; line-height: 1.65; color: var(--ink-2); }
 .post p, .post h2, .post h3, .post ol, .post ul, .post .tablewrap, .post .legal, .post .keynum, .post .test { max-width: 740px; }
 .post p { margin: 0 0 18px; }
