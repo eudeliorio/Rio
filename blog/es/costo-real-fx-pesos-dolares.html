@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../assets/rio.css?v=33" />
+<link rel="stylesheet" href="../../assets/rio.css?v=34" />
 <link rel="canonical" href="https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares">
 <link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares">
 <link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/real-cost-of-mxn-fx">
@@ -19,7 +19,7 @@
 <meta property="og:description" content="Las tres partes del costo de FX, una prueba de dos minutos que muestra si su banco ejecuta o solo cotiza, el costo del efectivo ocioso que ninguna factura muestra y la aritmética de cambiar de proveedor.">
 <meta property="og:url" content="https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "El costo real de su FX en pesos: tres partes, la que ninguna factura muestra y cuándo conviene cambiar de proveedor", "description": "Las tres partes del costo de FX, una prueba de dos minutos que muestra si su banco ejecuta o solo cotiza, el costo del efectivo ocioso que ninguna factura muestra y la aritmética de cambiar de proveedor.", "inLanguage": "es-MX", "articleSection": "FX", "url": "https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "El costo real de su FX en pesos: tres partes, la que ninguna factura muestra y cuándo conviene cambiar de proveedor", "description": "Las tres partes del costo de FX, una prueba de dos minutos que muestra si su banco ejecuta o solo cotiza, el costo del efectivo ocioso que ninguna factura muestra y la aritmética de cambiar de proveedor.", "inLanguage": "es-MX", "articleSection": "FX", "url": "https://www.rio.trade/es/blog/costo-real-fx-pesos-dolares", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "es-MX", "mainEntity": [{"@type": "Question", "name": "¿Qué es un punto base?", "acceptedAnswer": {"@type": "Answer", "text": "Una centésima de uno por ciento. Cien puntos base son uno por ciento. Sobre un millón de dólares, un punto base son cien dólares. El FX institucional se negocia en puntos base y no en porcentajes porque a USD 20 millones al mes, la diferencia entre 5 y 25 puntos base son USD 480 mil al año."}}, {"@type": "Question", "name": "¿Cómo calculo el costo all-in de una operación?", "acceptedAnswer": {"@type": "Answer", "text": "Divida los pesos que entregó entre los dólares que recibió para obtener el tipo de cambio que realmente obtuvo, y compárelo con el de mercado en el momento de la operación. La diferencia, en puntos base, es su costo all-in. Use la hora exacta de ejecución, no el cierre del día."}}, {"@type": "Question", "name": "¿Por qué mi banco y mi proveedor me muestran el mismo tipo de cambio?", "acceptedAnswer": {"@type": "Answer", "text": "Porque casi con seguridad le están mostrando una referencia del día, no el precio al que ejecutaron. Dos contrapartes independientes casi nunca ejecutan al mismo precio hasta el cuarto decimal. Tipos de cambio idénticos significan una cotización pasada de mano en mano, no competencia."}}, {"@type": "Question", "name": "¿El efectivo en tránsito es un costo real?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Un ciclo de liquidación de dos días sobre un flujo recurrente mantiene un saldo permanente fuera de su capital de trabajo, y le deja a usted el riesgo cambiario entre la orden y la liquidación. El costo es invisible solo porque se paga en oportunidad perdida y no en comisiones."}}, {"@type": "Question", "name": "¿Rio publica sus spreads?", "acceptedAnswer": {"@type": "Answer", "text": "No. El precio depende del volumen, del corredor y de las condiciones de mercado en el momento de la operación, así que una tarifa publicada engañaría. Lo que Rio sí le da es el tipo de cambio de mercado y el spread por separado en cada cotización, que es lo único que hace comparable a un proveedor con otro."}}]}</script>
 </head>
 <body>
@@ -55,11 +55,12 @@
   <div class="container">
     <div class="eyebrow rv"><span class="idx">02 / 04</span> Serie corredor MXN</div>
     <h1 class="rv d1">El costo real de su FX en pesos: tres partes, la que ninguna factura muestra y cuándo conviene cambiar de proveedor</h1>
+    <p class="answer rv d2">El costo real de convertir entre pesos y dólares es la diferencia all-in, en puntos base, entre el tipo de cambio al que ejecutó y el de mercado en ese minuto, más el efectivo que queda en tránsito hasta la liquidación. En México, las empresas suelen pagar decenas de puntos base all-in. Los clientes de mayor volumen de Rio pagan un dígito.</p>
     <p class="sub rv d2">La mayoría de las tesorerías no puede decir, al punto base, cuánto paga por sus pesos. Aquí va cómo averiguarlo en dos semanas, y cómo decidir si el número amerita un cambio.</p>
     <div class="post-meta rv d3">
       <div class="byline">
         <div class="avatar" aria-hidden="true">GO</div>
-        <div><span class="name">Gabriel Ortiz</span>, Head of Growth en Rio<br>FX, <time datetime="2026-10-01">1 de octubre de 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">8 min de lectura</span></div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth en Rio<br>FX, <time datetime="2026-10-14">14 de octubre de 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">8 min de lectura</span></div>
       </div>
       <div class="post-tools">
         <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="../real-cost-of-mxn-fx.html" hreflang="en" lang="en">EN</a><a href="costo-real-fx-pesos-dolares.html" hreflang="es-MX" lang="es" aria-current="true">ES</a></span>
@@ -78,7 +79,7 @@
 
   <p>Esto está escrito para quien lleva la tesorería o el FX en una fintech, un PSP, una remesadora o un exportador que convierte más de USD 5 millones al mes. Por debajo de eso, el ejercicio sigue siendo correcto pero rara vez amerita cambiar de proveedor. Por encima, la brecha entre lo que paga y lo que podría pagar suele equivaler al sueldo de un directivo de finanzas.</p>
 
-  <h2>Los tres bolsillos</h2>
+  <h2>¿De qué se compone el costo de convertir pesos a dólares?</h2>
   <p>Un costo de FX tiene tres partes, y los proveedores pueden mover el dinero entre ellas.</p>
   <ol class="steps">
     <li><strong>El spread.</strong> La diferencia entre el tipo de cambio que recibe y el de mercado en ese momento. La parte más grande y la más difícil de ver.</li>
@@ -88,10 +89,10 @@
   <p>Por eso comparar tarifas publicadas no lleva a ningún lado. Un proveedor puede anunciar una comisión muy baja y recuperarla en el tipo de cambio al que ejecuta, y ninguna factura lo va a mostrar. La comisión y el spread son dos bolsillos del mismo saco.</p>
   <p>Un punto base es una centésima de uno por ciento. Sobre un millón de dólares, un punto base son cien dólares. Guárdese ese dato para la tabla de abajo.</p>
 
-  <h2>Cómo saber cuánto paga hoy</h2>
+  <h2>¿Cómo saber cuánto le cobran hoy por su FX en pesos?</h2>
   <p>La mayoría de las tesorerías no lo puede ver, y no por descuido. Si su sistema contable registra la operación al tipo de cambio de referencia del día, la cifra en pesos que aparece en libros es un cálculo, no el tipo al que ejecutó. El costo real vive fuera del registro. Así que hay que ir por él.</p>
   <aside class="test" aria-labelledby="medicion">
-    <h3 id="medicion">La medición</h3>
+    <h3 id="medicion">Cómo calcular su costo all-in en puntos base, paso a paso</h3>
     <ol class="steps">
       <li>Anote el tipo de cambio de mercado en el minuto exacto de la operación. No el cierre del día. El USD/MXN suele moverse más en un día que el spread que está buscando.</li>
       <li>Anote los pesos que realmente salieron de su cuenta y los dólares que realmente llegaron.</li>
@@ -101,17 +102,17 @@
     <p>Hágalo con cada operación durante dos semanas. Va a terminar con el número que su proveedor nunca puso en una factura.</p>
   </aside>
 
-  <h2>El costo que ninguna factura muestra</h2>
+  <h2>El costo oculto del FX bancario: efectivo en tránsito por dos días</h2>
   <p>El tiempo. En el camino bancario una operación USD/MXN liquida dos días hábiles después. Durante esos dos días su efectivo está comprometido, no genera nada, y usted carga con el riesgo de que el tipo de cambio se mueva entre la orden y la liquidación. Alguien absorbe ese riesgo, y el banco lo cobra dentro del spread.</p>
   <p>Mueva USD 50 millones al mes en operaciones repartidas a lo largo del mes y T+2 significa varios millones de dólares permanentemente en tránsito. Si tuviera que pedir ese dinero en una línea de crédito, el costo tendría un renglón. Como sale del capital de trabajo, nadie lo mide.</p>
   <p>Una conversión por stablecoin que liquida en uno a dos minutos elimina el dinero en tránsito. El precio que acepta es el precio al que liquida, en el mismo minuto. <a href="anatomia-operacion-usdc-a-pesos.html">El artículo 01 de esta serie</a> sigue una operación de USD 10 millones por ambos caminos, con hora y minuto.</p>
 
-  <h2>Cuánto se paga en México</h2>
+  <h2>¿Cuánto se paga por convertir pesos a dólares en México?</h2>
   <!-- GATE G2: la mesa reconfirma "decenas de puntos base" y "un dígito para los clientes más grandes" como publicable -->
   <p>No existe una referencia pública para este mercado, así que lo que sigue es lo que Rio ve en las operaciones que ejecuta en México, no una estadística de la industria. En conversiones corporativas peso-dólar, el costo all-in contra el tipo de cambio de mercado suele estar en decenas de puntos base. Los clientes de mayor volumen de Rio operan en un dígito.</p>
   <p>Póngale números. Una fintech que convierte USD 20 millones al mes a 25 puntos base all-in deja USD 50 mil al mes en el spread, USD 600 mil al año. La misma fintech a 5 puntos base paga USD 10 mil al mes. La diferencia, USD 480 mil al año, es el costo de nunca haber hecho la prueba de arriba.</p>
 
-  <h2>Cuándo conviene cambiar</h2>
+  <h2>¿Cuántos puntos base de mejora justifican cambiar de proveedor de FX?</h2>
   <p>No hay regla general. Es aritmética: cada punto base de mejora, por su volumen mensual, por doce. Si eso no cubre el costo de migrar, integrar y volver a pasar por cumplimiento, quédese donde está.</p>
   <div class="tablewrap"><table>
     <caption class="sans" style="text-align:left;color:var(--muted);padding-bottom:.5rem">Ahorro anual, en USD, por volumen mensual y puntos base de mejora</caption>
@@ -125,7 +126,7 @@
   </table></div>
   <p>Contra ese ahorro, cuente el costo del cambio: tiempo de ingeniería, alta y cumplimiento con una nueva contraparte, y las semanas de operar con dos proveedores a la vez. A USD 1 millón al mes, diez puntos base rara vez lo cubren. A USD 20 millones, cinco pueden bastar. Mismos puntos base, decisiones opuestas.</p>
 
-  <h2>Siete cosas que pedir, para que las cotizaciones se alineen</h2>
+  <h2>Qué pedirle a un proveedor de FX para comparar cotizaciones</h2>
   <p>Pida lo mismo a todos los proveedores, el mismo día, por el mismo monto. Si cada uno responde en un formato distinto, no tiene nada que comparar.</p>
   <ol class="steps">
     <li>El tipo de cambio de mercado y el spread, por separado. No un solo número ciego.</li>
@@ -138,7 +139,7 @@
   </ol>
   <p>Una cotización que no se puede separar en tipo de mercado más spread no es comparable con ninguna otra. Punto.</p>
 
-  <h2>Qué cambia con Rio</h2>
+  <h2>Cómo cotiza Rio la conversión entre pesos y USDC</h2>
   <p>Cuatro cosas, y las cuatro las puede comprobar con la medición de arriba.</p>
   <p><strong>Un solo número.</strong> Cada cotización es un precio all-in contra el tipo de cambio de mercado en vivo, con el tipo de mercado y el spread mostrados por separado. Sin comisión de taker, sin comisión de fiat aparte. El spread de la cotización es el costo completo.</p>
   <p><strong>En firme por el monto completo.</strong> La cotización puede ejecutarse por el monto cotizado durante unos diez segundos. Sin recotización al confirmar, sin last look.</p>
@@ -160,8 +161,8 @@
     <p>No. El precio depende del volumen, del corredor y de las condiciones de mercado en el momento de la operación, así que una tarifa publicada engañaría. Lo que Rio sí le da es el tipo de cambio de mercado y el spread por separado en cada cotización, que es lo único que hace comparable a un proveedor con otro.</p>
   </section>
   <section class="about" aria-labelledby="sobre">
-    <h2 id="sobre">Sobre Rio</h2>
-    <p>Rio es infraestructura de FX con stablecoins para América Latina. Ofrece liquidez, conversión y dispersión a rieles locales en México, Colombia y Perú para fintechs y empresas, con cotización all-in contra el tipo de cambio de mercado, precio en firme por el monto completo y liquidación en minutos. Rio maneja más de USD 8 mil millones de volumen anualizado.</p>
+    <h2 id="sobre">¿Qué es Rio?</h2>
+    <p>Rio es infraestructura de FX con stablecoins para América Latina. Ofrece liquidez, conversión y dispersión a rieles locales en México, Colombia y Perú para fintechs y empresas, con cotización all-in contra el tipo de cambio de mercado, precio en firme por el monto completo y liquidación en minutos. Rio va en camino a un run rate anual de USD 12 mil millones.</p>
     <!-- GATE: párrafo legal pendiente de Luis -->
     <p class="legal">En México, los servicios de FX los presta Rampa Blockchain, S.A.P.I. de C.V. Rio es una empresa de tecnología, no un banco, y no capta depósitos.</p>
   </section>
@@ -176,7 +177,7 @@
     <p>Precios en firme, liquidados en minutos. USDC y USDT contra MXN, COP y PEN, 24/7.</p>
     <a class="btn" href="../../contact.html">Hablar con Rio</a>
   </aside>
-  <p class="updated">Última actualización: <time datetime="2026-10-01">1 de octubre de 2026</time></p>
+  <p class="updated">Última actualización: <time datetime="2026-10-14">14 de octubre de 2026</time></p>
 
 </article>
 </main>

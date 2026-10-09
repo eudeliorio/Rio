@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../assets/rio.css?v=33" />
+<link rel="stylesheet" href="../../assets/rio.css?v=34" />
 <link rel="canonical" href="https://www.rio.trade/es/blog/anatomia-operacion-usdc-a-pesos">
 <link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/anatomia-operacion-usdc-a-pesos">
 <link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/anatomy-usdc-to-mxn-trade">
@@ -20,7 +20,7 @@
 <meta property="og:url" content="https://www.rio.trade/es/blog/anatomia-operacion-usdc-a-pesos">
 <meta property="og:image" content="https://www.rio.trade/img/blog/rio-blog-01-two-routes.png">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Anatomía de una operación de USD 10 millones de USDC a pesos: a dónde va el dinero en cada paso", "description": "Una orden de USD 10 millones de dólares a pesos, puesta un martes a las 3:14pm, seguida minuto a minuto por transferencia bancaria y por Rio. Dónde se van el spread, el efectivo ocioso y las horas.", "inLanguage": "es-MX", "url": "https://www.rio.trade/es/blog/anatomia-operacion-usdc-a-pesos", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "Anatomía de una operación de USD 10 millones de USDC a pesos: a dónde va el dinero en cada paso", "description": "Una orden de USD 10 millones de dólares a pesos, puesta un martes a las 3:14pm, seguida minuto a minuto por transferencia bancaria y por Rio. Dónde se van el spread, el efectivo ocioso y las horas.", "inLanguage": "es-MX", "url": "https://www.rio.trade/es/blog/anatomia-operacion-usdc-a-pesos", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "es-MX", "mainEntity": [{"@type": "Question", "name": "¿Por qué el FX bancario hacia México liquida dos días después?", "acceptedAnswer": {"@type": "Answer", "text": "T+2 es el ciclo de liquidación estándar para USD/MXN en el mercado interbancario, y CLS liquida en esa fecha valor, no en la fecha de la operación. Elimina el riesgo de que una parte pague y la otra no. No acorta el ciclo. Con Rio el precio queda fijado cuando acepta y el pago sale dentro de los minutos siguientes a su liquidación, porque tanto la stablecoin como SPEI operan todo el tiempo."}}, {"@type": "Question", "name": "¿La conversión por stablecoin es más cara fuera del horario de mercado?", "acceptedAnswer": {"@type": "Answer", "text": "La liquidez del peso se reduce fuera de la sesión de Nueva York y en fin de semana, y los spreads se abren en cualquier camino, bancario o de stablecoin. La diferencia es que una cotización all-in en firme le muestra el costo de las horas fuera de mercado antes de ejecutar, y usted decide si opera ahora o espera a la apertura. El artículo 03 describe el panorama hora por hora."}}, {"@type": "Question", "name": "¿Qué significa \"precio en firme\" en la práctica?", "acceptedAnswer": {"@type": "Answer", "text": "Un precio que el proveedor tiene que respetar por el monto cotizado durante su ventana de validez. Lo contrario es un precio indicativo, que puede cambiar al confirmar, o una cotización con last look, donde el proveedor puede rechazar la operación después de que usted la acepta. Las cotizaciones de Rio son en firme durante unos diez segundos por el monto completo, sin last look."}}, {"@type": "Question", "name": "¿Qué es un TWAP y cuándo conviene?", "acceptedAnswer": {"@type": "Answer", "text": "Precio promedio ponderado por tiempo. Una orden grande se divide en tramos a lo largo de una ventana definida para que su ejecución quede cerca del promedio de esa ventana y no del precio de un instante. Úselo siempre que un solo ticket sea lo bastante grande para mover el mercado en su contra si se cruza de una vez. En MXN fuera del horario estadounidense, eso pasa con montos muy por debajo de USD 10 millones."}}, {"@type": "Question", "name": "¿En qué redes puede llegar la liquidación?", "acceptedAnswer": {"@type": "Answer", "text": "Solana, Arc, Stellar, Polygon, Tron, Ethereum y Base, en USDC o USDT. La red afecta qué tan rápido confirma su liquidación y cuál es la comisión de red. No afecta el precio de FX, que se cotiza contra el tipo de cambio de mercado sin importar la red. Detalles en la documentación para desarrolladores."}}]}</script>
 </head>
 <body>
@@ -56,11 +56,12 @@
   <div class="container">
     <div class="eyebrow rv"><span class="idx">01 / 04</span> Serie corredor MXN</div>
     <h1 class="rv d1">Anatomía de una operación de USD 10 millones de USDC a pesos: a dónde va el dinero en cada paso</h1>
+    <p class="answer rv d2">Un off-ramp de USDC a pesos convierte stablecoins en pesos mexicanos y los deposita por SPEI. Con Rio, una operación de USD 10 millones pasa de liquidación enviada a pesos en la cuenta en uno a dos minutos, cualquier día de la semana, contra dos días hábiles por transferencia bancaria.</p>
     <p class="sub rv d2">Una orden. Martes, 3:14 de la tarde, Ciudad de México. La seguimos por una transferencia bancaria y por una operación con stablecoins en Rio, minuto a minuto.</p>
     <div class="post-meta rv d3">
       <div class="byline">
         <div class="avatar" aria-hidden="true">GO</div>
-        <div><span class="name">Gabriel Ortiz</span>, Head of Growth en Rio<br>Mercados, <time datetime="2026-10-01">1 de octubre de 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">9 min de lectura</span></div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth en Rio<br>Mercados, <time datetime="2026-10-14">14 de octubre de 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">9 min de lectura</span></div>
       </div>
       <div class="post-tools">
         <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="../anatomy-usdc-to-mxn-trade.html" hreflang="en" lang="en">EN</a><a href="anatomia-operacion-usdc-a-pesos.html" hreflang="es-MX" lang="es" aria-current="true">ES</a></span>
@@ -78,7 +79,7 @@
     <p class="small">Quédese con eso. Casi todo lo que sigue es sobre centavos, y sobre horas, que son centavos disfrazados.</p>
   </section>
 
-  <h2>La orden</h2>
+  <h2>Una operación de USD 10 millones de USDC a pesos, paso a paso</h2>
   <p>Una empresa de pagos tiene que fondear dispersiones a comercios en México. Necesita los pesos de USD 10 millones en su cuenta mexicana antes del jueves. Es martes, 3:14 de la tarde en Ciudad de México, 4:14 en Nueva York. El mercado del peso está abierto de par en par.</p>
   <p>El tesorero tiene dos formas de hacerlo.</p>
 
@@ -86,7 +87,7 @@
 
   <div class="roads">
     <section class="road road-a" aria-labelledby="camino-a">
-      <h2 id="camino-a">Camino A: la transferencia bancaria</h2>
+      <h2 id="camino-a">Cómo se convierten USD 10 millones a pesos por transferencia bancaria</h2>
       <ol class="timeline">
         <li><time datetime="2026-09-29T15:14-06:00">Martes, 3:14pm</time><p>El tesorero llama a la mesa de cambios del banco o le da clic al portal. El banco le muestra un tipo de cambio. Un número. No el tipo de mercado más un margen, solo el tipo. El tesorero acepta. Se cargan los dólares.</p></li>
         <li><time datetime="2026-09-29T15:20-06:00">Martes, 3:20pm</time><p>Sale un mensaje SWIFT al banco corresponsal, la institución que su banco usa para llegar a México. A partir de este momento el tesorero ya no controla nada. No hay página de estatus.</p></li>
@@ -98,7 +99,7 @@
     </section>
 
     <section class="road road-b" aria-labelledby="camino-b">
-      <h2 id="camino-b">Camino B: la misma orden con Rio</h2>
+      <h2 id="camino-b">Cómo se convierten USD 10 millones de USDC a pesos con Rio: off-ramp con pago por SPEI</h2>
       <ol class="timeline">
         <li><time datetime="2026-09-29T15:14:00-06:00">3:14:00pm</time><p>El tesorero pide cotización de USDC a MXN, USD 10 millones. Rio devuelve un solo número all-in contra el tipo de cambio de mercado en vivo, con el tipo de mercado y el spread mostrados por separado. La cotización es en firme por el monto completo durante unos diez segundos.</p></li>
         <li><time datetime="2026-09-29T15:14:08-06:00">3:14:08pm</time><p>El tesorero acepta. La operación queda registrada a ese precio. No "sujeta a confirmación". Registrada. No hay last look, la práctica bancaria de rechazar una operación después de que usted la aceptó. Sin recotización. Sin comisión de taker ni de entrada o salida de fiat encima.</p></li>
@@ -114,18 +115,18 @@
   <!-- GATE G1: párrafo legal pendiente de Luis -->
   <p class="legal">En México, los servicios de FX los presta Rampa Blockchain, S.A.P.I. de C.V., que realiza operaciones con activos virtuales como actividad vulnerable conforme al artículo 17, fracción XVI, de la LFPIORPI. Rio no es participante directo de SPEI. Liquida a través de sus propias cuentas en bancos mexicanos regulados.</p>
 
-  <h2>A dónde se fueron los centavos</h2>
+  <h2>Transferencia bancaria vs stablecoins: qué cambia para una tesorería</h2>
   <p>Ahora ponga las dos bitácoras una junto a la otra y busque el dinero.</p>
-  <h3>El tipo de cambio</h3>
+  <h3>El tipo de cambio: cuánto cuesta un centavo de margen en USD 10 millones</h3>
   <p>En el Camino A el tesorero vio un número y no tenía forma de saber cuántos centavos había entre ese número y el mercado. En el Camino B el tipo de mercado y el spread estaban en pantalla antes de operar. Se puede discutir si un spread es justo. No se puede discutir un spread que no se ve. Y recuerde: diez centavos en este ticket son un millón de pesos.</p>
-  <h3>Las 44 horas</h3>
+  <h3>Efectivo ocioso: el costo de liquidar dos días después</h3>
   <p>USD 10 millones fuera del capital de trabajo durante dos días, cada vez. Una empresa que mueve USD 50 millones al mes en operaciones repartidas a lo largo del mes tiene varios millones de dólares permanentemente en tránsito. Ese dinero no genera, no paga proveedores, no sirve de colchón. Está en el libro de un corresponsal.</p>
-  <h3>El hueco</h3>
+  <h3>Riesgo de precio entre la orden y la liquidación</h3>
   <p>En el Camino A el tipo de cambio se fijó el martes y los pesos llegaron el jueves. Alguien cargó con el riesgo de que el USD/MXN se moviera en medio, y ese alguien lo cobró dentro del tipo. En el Camino B el precio quedó fijado a las 3:14:08 y la liquidación terminó a las 3:15:32. No hubo hueco que cobrar.</p>
-  <h3>El calendario</h3>
+  <h3>Horario: operar 24/7 frente al horario bancario</h3>
   <p>La orden del Camino A funcionó porque era martes en la tarde. De haber sido viernes a las 6pm, los pesos habrían llegado el martes o el miércoles. Al Camino B no le importa qué día es. La liquidez del peso es menor fuera del horario de Nueva York en cualquier camino, así es el mercado, pero en el Camino B el costo de las horas fuera de mercado aparece en la cotización antes de operar, no en un estado de cuenta después. <a href="liquidez-del-peso-hora-por-hora.html">El artículo 03 de esta serie</a> trata exactamente de eso.</p>
 
-  <h2>El corredor en números</h2>
+  <h2>El mercado del peso mexicano en cifras: tamaño, rieles y liquidación</h2>
   <div class="tablewrap"><table>
     <tr><th scope="row">Moneda</th><td>Peso mexicano (MXN)</td></tr>
     <tr><th scope="row">Reglas</th><td>Flotación libre. Sin controles de capital. Sin impuesto a las operaciones cambiarias.</td></tr>
@@ -138,10 +139,10 @@
     <tr><th scope="row">Redes</th><td>Solana, Arc, Stellar, Polygon, Tron, Ethereum, Base</td></tr>
   </table></div>
 
-  <h2>Por qué el precio del peso se fija en Nueva York</h2>
+  <h2>¿De dónde sale el tipo de cambio dólar-peso?</h2>
   <p>El peso es un mercado de dólares. El 98% se opera contra el USD, y la mayor parte de eso ocurre en Nueva York y Londres, no en México. El tipo de cambio de cualquier pantalla es una referencia que viene de los grandes bancos operando entre sí. Cada capa entre esos bancos y su cuenta agrega centavos, y el número de capas no es el número de precios que compiten. Dos bancos que le muestran el mismo tipo hasta el cuarto decimal no están compitiendo por su negocio. Le están pasando la misma cotización.</p>
 
-  <h2>Cuatro preguntas para reenviar a su banco</h2>
+  <h2>Cómo evaluar a un proveedor de FX con stablecoins: cuatro preguntas</h2>
   <p>Un spread estrecho en pantalla no dice nada por sí solo. Estas separan a un proveedor de liquidez de un intermediario que revende el precio de otro. Cópielas en un correo.</p>
   <!-- GATE G3: visto bueno de la mesa sobre cotización en firme / sin last look / TWAP / axes -->
   <ol class="questions">
@@ -151,7 +152,7 @@
     <li>¿Qué pasa cuando tienen flujo en sentido contrario? Una mesa con algunos clientes comprando pesos y otros vendiendo puede cruzarlos internamente. Los traders lo llaman un axe, y cuando ocurre la mesa puede cotizar muy por dentro de su spread normal. ¿Avisan a sus clientes cuando tienen uno?</li>
   </ol>
 
-  <h2>Un caso</h2>
+  <h2>Cuánto ahorró una red de remesas al convertir con stablecoins</h2>
   <!-- GATE G4: validar redacción con el responsable de la relación -->
   <p>Una de las redes de remesas más grandes del mundo trasladó la mayor parte de su flujo de FX en México al Camino B y midió un ahorro de alrededor de 30% frente a sus bancos anteriores, con liquidación en minutos en lugar de días. El ahorro vino del tipo de cambio, las horas y el hueco juntos, no de uno solo.</p>
 
@@ -170,8 +171,8 @@
   </section>
 
   <section class="about" aria-labelledby="sobre">
-    <h2 id="sobre">Sobre Rio</h2>
-    <p>Rio es infraestructura de FX con stablecoins para América Latina. Ofrece liquidez, conversión y dispersión a rieles locales en México, Colombia y Perú para fintechs y empresas, con cotización all-in contra el tipo de cambio de mercado, precio en firme por el monto completo y liquidación en minutos. Rio maneja más de USD 8 mil millones de volumen anualizado.</p>
+    <h2 id="sobre">¿Qué es Rio?</h2>
+    <p>Rio es infraestructura de FX con stablecoins para América Latina. Ofrece liquidez, conversión y dispersión a rieles locales en México, Colombia y Perú para fintechs y empresas, con cotización all-in contra el tipo de cambio de mercado, precio en firme por el monto completo y liquidación en minutos. Rio va en camino a un run rate anual de USD 12 mil millones.</p>
     <!-- GATE G1 -->
     <p class="legal">En México, los servicios de FX los presta Rampa Blockchain, S.A.P.I. de C.V. Rio es una empresa de tecnología, no un banco, y no capta depósitos.</p>
   </section>
@@ -188,7 +189,7 @@
     <a class="btn" href="../../contact.html">Hablar con Rio</a>
   </aside>
 
-  <p class="updated">Última actualización: <time datetime="2026-10-01">1 de octubre de 2026</time></p>
+  <p class="updated">Última actualización: <time datetime="2026-10-14">14 de octubre de 2026</time></p>
 
 </article>
 </main>

@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../../assets/rio.css?v=33" />
+<link rel="stylesheet" href="../../assets/rio.css?v=34" />
 <link rel="canonical" href="https://www.rio.trade/es/blog/spei-vs-spid-rieles-mexico">
 <link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/spei-vs-spid-rieles-mexico">
 <link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/spei-vs-spid-mexico-rails">
@@ -19,7 +19,7 @@
 <meta property="og:description" content="Los dos rieles de pago de México explicados para tesorerías. SPEI para pesos (24/7, segundos), SPID para dólares entre cuentas bancarias mexicanas (solo empresas, 08:00 a 14:15), CLABE, cortes, y cómo Rio conecta ambos con redes de stablecoin.">
 <meta property="og:url" content="https://www.rio.trade/es/blog/spei-vs-spid-rieles-mexico">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SPEI vs SPID: cómo se mueven los pesos y los dólares dentro de México, y dónde entran las stablecoins", "description": "Los dos rieles de pago de México explicados para tesorerías. SPEI para pesos (24/7, segundos), SPID para dólares entre cuentas bancarias mexicanas (solo empresas, 08:00 a 14:15), CLABE, cortes, y cómo Rio conecta ambos con redes de stablecoin.", "inLanguage": "es-MX", "articleSection": "Mercados", "url": "https://www.rio.trade/es/blog/spei-vs-spid-rieles-mexico", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "SPEI vs SPID: cómo se mueven los pesos y los dólares dentro de México, y dónde entran las stablecoins", "description": "Los dos rieles de pago de México explicados para tesorerías. SPEI para pesos (24/7, segundos), SPID para dólares entre cuentas bancarias mexicanas (solo empresas, 08:00 a 14:15), CLABE, cortes, y cómo Rio conecta ambos con redes de stablecoin.", "inLanguage": "es-MX", "articleSection": "Mercados", "url": "https://www.rio.trade/es/blog/spei-vs-spid-rieles-mexico", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "es-MX", "mainEntity": [{"@type": "Question", "name": "¿Qué es una CLABE?", "acceptedAnswer": {"@type": "Answer", "text": "La Clave Bancaria Estandarizada, el número de cuenta de 18 dígitos que se usa en cada transferencia SPEI en México. Tres dígitos para el banco, tres para la sucursal, once para la cuenta, uno verificador. Una transferencia a una CLABE inexistente, o cuyo titular no coincide, es rechazada por el banco receptor y devuelta. Un reintento, no una pérdida."}}, {"@type": "Question", "name": "¿Una transferencia de Estados Unidos a México pasa por SPID?", "acceptedAnswer": {"@type": "Answer", "text": "No. SPID solo mueve dólares entre cuentas en dólares de bancos mexicanos, y solo para empresas domiciliadas en México. Una transferencia transfronteriza la convierten a pesos los bancos en el camino y llega a una cuenta mexicana en pesos, desde donde se mueve por SPEI."}}, {"@type": "Question", "name": "¿Rio puede pagarme en dólares dentro de México?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Si su empresa tiene cuenta en dólares en un banco mexicano, puede operar pesos a dólares, liquidar los pesos por SPEI, y recibir los dólares por SPID en la cuenta mexicana en dólares que dio de alta. También funciona al revés: fondear una operación de dólares a pesos por SPID y recibir pesos por SPEI. Los pagos y fondeos por SPID están limitados a días hábiles, de 08:00 a 14:15."}}, {"@type": "Question", "name": "¿Qué pasa si un pago por SPID no alcanza el corte?", "acceptedAnswer": {"@type": "Answer", "text": "Espera al siguiente día hábil. No hay ventana fuera de horario ni liquidez en dólares del banco central en SPID. Si necesita el otro lado antes, liquide en cadena, que no tiene corte, o use el sobregiro de Rio para que el pago salga hoy y usted liquide hasta tres días después."}}, {"@type": "Question", "name": "¿Qué debo dar de alta antes de operar?", "acceptedAnswer": {"@type": "Answer", "text": "Los destinos a los que Rio le pagará: una o más CLABEs para pesos, una cuenta mexicana en dólares si usa pagos por SPID, y una dirección de wallet por red para USDC o USDT. Los pagos solo salen a destinos dados de alta, y eso es lo que permite que corran automáticamente en el momento en que llega su liquidación."}}]}</script>
 </head>
 <body>
@@ -55,11 +55,12 @@
   <div class="container">
     <div class="eyebrow rv"><span class="idx">04 / 04</span> Serie corredor MXN</div>
     <h1 class="rv d1">SPEI vs SPID: cómo se mueven los pesos y los dólares dentro de México, y dónde entran las stablecoins</h1>
+    <p class="answer rv d2">SPEI mueve pesos mexicanos entre bancos en segundos, 24/7. SPID mueve dólares entre cuentas en dólares de bancos mexicanos, solo para empresas, en días hábiles de 08:00 a 14:15 hora de Ciudad de México. Rio conecta ambos con stablecoins, así que una empresa puede hacer off-ramp de USDC o USDT a pesos o a dólares onshore sin una transferencia transfronteriza.</p>
     <p class="sub rv d2">México tiene uno de los mejores sistemas de pagos inmediatos del mundo para su propia moneda, y uno mucho más acotado para dólares del que casi nadie fuera de México ha oído hablar. Qué hace cada uno, qué no puede hacer, y cómo Rio se conecta con ambos.</p>
     <div class="post-meta rv d3">
       <div class="byline">
         <div class="avatar" aria-hidden="true">GO</div>
-        <div><span class="name">Gabriel Ortiz</span>, Head of Growth en Rio<br>Mercados, <time datetime="2026-10-01">1 de octubre de 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">8 min de lectura</span></div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth en Rio<br>Mercados, <time datetime="2026-10-14">14 de octubre de 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">8 min de lectura</span></div>
       </div>
       <div class="post-tools">
         <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="../spei-vs-spid-mexico-rails.html" hreflang="en" lang="en">EN</a><a href="spei-vs-spid-rieles-mexico.html" hreflang="es-MX" lang="es" aria-current="true">ES</a></span>
@@ -78,7 +79,7 @@
 
   <p>Esto es para equipos de tesorería, pagos y producto en fintechs, PSPs y remesadoras que mantienen o mueven dólares y pesos dentro de México, y para cualquiera que quiera saber exactamente qué pasa entre "acepté la cotización" y "el dinero está en la cuenta".</p>
 
-  <h2>Los dos rieles lado a lado</h2>
+  <h2>SPEI vs SPID: horarios, velocidad y quién puede usarlos</h2>
   <div class="tablewrap"><table class="compare">
     <thead><tr><th scope="col"></th><th scope="col">SPEI</th><th scope="col">SPID</th></tr></thead>
     <tbody>
@@ -93,16 +94,16 @@
     </tbody>
   </table></div>
 
-  <h2>SPEI: por qué México liquida pesos en segundos</h2>
+  <h2>¿Qué es SPEI y por qué liquida pesos en segundos?</h2>
   <p>SPEI, el Sistema de Pagos Electrónicos Interbancarios, es el sistema en tiempo real de Banco de México para pesos. Procesa transferencias entre bancos en segundos, las 24 horas, todos los días del año. Cada cuenta se identifica con una CLABE de 18 dígitos que codifica el banco, la sucursal y la cuenta. Mande a una CLABE equivocada y el banco receptor la rechaza y la regresa. Es un reintento, no una pérdida.</p>
   <p>Para una tesorería, SPEI significa que el lado en pesos de cualquier flujo hacia México no tiene ninguna restricción operativa que valga la pena planear. Los pesos pueden salir a las 3am de un domingo y llegar antes de que usted cierre la pestaña.</p>
 
-  <h2>SPID: el riel de dólares dentro de México</h2>
+  <h2>¿Qué es SPID y para qué sirve?</h2>
   <p>SPID, el Sistema de Pagos Interbancarios en Dólares, mueve dólares estadounidenses entre cuentas en dólares de bancos mexicanos. Existe porque las empresas mexicanas mantienen cuentas en dólares onshore, sobre todo para importación y exportación, y necesitan pagarse entre ellas en dólares sin dar la vuelta por Estados Unidos.</p>
   <p>Viene con cuatro límites. Opera solo en días hábiles, de 08:00 a 14:15. Solo participan bancos, y solo pueden usarlo empresas domiciliadas en México con cuenta en dólares. Banco de México no provee liquidez en dólares, así que cada banco fondea sus obligaciones en SPID con dólares mantenidos en un corresponsal estadounidense. Y aun dentro de la ventana, un banco puede retener un pago hasta el cierre de operaciones para terminar sus revisiones antilavado.</p>
   <p>En la práctica: un pago en dólares entre dos cuentas mexicanas instruido un viernes por la tarde se mueve el lunes, y un depósito en dólares que llega después del corte toma valor el siguiente día hábil.</p>
 
-  <h2>Cómo funciona una operación en Rio: precio, liquidación, pago</h2>
+  <h2>Cómo funciona una operación de FX con Rio: precio, liquidación y pago automático</h2>
   <p>Rio trabaja en un orden distinto al de un banco, y el orden importa.</p>
   <ol class="steps">
     <li><strong>Fijar el precio.</strong> Usted recibe una cotización para el par y el monto, all-in contra el tipo de cambio de mercado en vivo, con el tipo de mercado y el spread mostrados por separado. En firme por el monto completo durante unos diez segundos. La acepta y la operación queda registrada a ese precio. <a href="costo-real-fx-pesos-dolares.html">El artículo 02</a> explica por qué importan los dos números.</li>
@@ -115,7 +116,7 @@
   <!-- GATE G1: párrafo legal pendiente de Luis -->
   <p class="legal">En México, los servicios de FX los presta Rampa Blockchain, S.A.P.I. de C.V., que realiza operaciones con activos virtuales como actividad vulnerable conforme al artículo 17, fracción XVI, de la LFPIORPI. Rio es una empresa de tecnología, no un banco, y no capta depósitos.</p>
 
-  <h2>Cuatro flujos, una sola cuenta</h2>
+  <h2>Cuatro flujos entre dólares, pesos y stablecoins con una sola cuenta</h2>
   <p>Como Rio está conectado a SPEI, a SPID y a las redes de stablecoin al mismo tiempo, una sola cuenta cubre las combinaciones que una tesorería en México realmente usa.</p>
   <div class="tablewrap"><table class="flows">
     <thead><tr><th scope="col">De → a</th><th scope="col">Operación</th><th scope="col">Usted liquida por</th><th scope="col">Rio paga por</th><th scope="col">Horario</th></tr></thead>
@@ -128,7 +129,7 @@
   </table></div>
   <p>Los dos primeros nunca se topan con un corte bancario. El primero es la operación del <a href="anatomia-operacion-usdc-a-pesos.html">artículo 01</a>. Los dos últimos sirven a empresas que mantienen cuentas en dólares onshore y quieren un precio de FX que puedan comparar contra el mercado en lugar de tomar el del banco, con los dólares quedándose en México.</p>
 
-  <h2>Qué red para el tramo en stablecoin</h2>
+  <h2>Qué red de stablecoin usar para liquidar y qué cambia entre ellas</h2>
   <p>El precio de FX es el mismo en todas las redes. Rio cotiza contra el tipo de cambio de mercado sin importar el riel. Lo que cambia es qué tan rápido confirma su liquidación y cuál es la comisión de red.</p>
   <!-- GATE G2: Javi confirma la columna "confirmación típica" contra la política de acreditación de depósitos de Rio -->
   <div class="tablewrap"><table>
@@ -145,7 +146,7 @@
   </table></div>
   <p>La mayoría de las tesorerías elige la red que sus contrapartes ya usan, en vez de optimizar el tramo. Sin importar en qué red llegue su liquidación, el pago que sigue es idéntico. Direcciones y detalles de red en la <a href="https://docs.rio.trade">documentación para desarrolladores</a>.</p>
 
-  <h2>Qué le hace esto a su calendario</h2>
+  <h2>SPEI, SPID y stablecoins: qué cambia en el calendario de una tesorería</h2>
   <p>Mantenga los dólares dentro del sistema bancario y su flujo hacia México corre con dos relojes: días hábiles para el lado en dólares, 24/7 para el lado en pesos. Use stablecoins para el lado en dólares y los dos lados corren 24/7. Esa es la diferencia entre que las conversiones del viernes por la tarde esperen al lunes o no, entre que las remesas del fin de semana se fondeen al tipo del viernes o del sábado, y entre programar su FX alrededor del mercado o alrededor de su negocio. <a href="liquidez-del-peso-hora-por-hora.html">El artículo 03</a> trata de cuánto cuesta el peso a cada una de esas horas.</p>
 
   <section class="faq" aria-labelledby="faq">
@@ -162,8 +163,8 @@
     <p>Los destinos a los que Rio le pagará: una o más CLABEs para pesos, una cuenta mexicana en dólares si usa pagos por SPID, y una dirección de wallet por red para USDC o USDT. Los pagos solo salen a destinos dados de alta, y eso es lo que permite que corran automáticamente en el momento en que llega su liquidación.</p>
   </section>
   <section class="about" aria-labelledby="sobre">
-    <h2 id="sobre">Sobre Rio</h2>
-    <p>Rio es infraestructura de FX con stablecoins para América Latina. Ofrece liquidez, conversión y dispersión a rieles locales en México, Colombia y Perú para fintechs y empresas, con cotización all-in contra el tipo de cambio de mercado, precio en firme por el monto completo y liquidación en minutos. Rio maneja más de USD 8 mil millones de volumen anualizado.</p>
+    <h2 id="sobre">¿Qué es Rio?</h2>
+    <p>Rio es infraestructura de FX con stablecoins para América Latina. Ofrece liquidez, conversión y dispersión a rieles locales en México, Colombia y Perú para fintechs y empresas, con cotización all-in contra el tipo de cambio de mercado, precio en firme por el monto completo y liquidación en minutos. Rio va en camino a un run rate anual de USD 12 mil millones.</p>
     <!-- GATE: párrafo legal pendiente de Luis -->
     <p class="legal">En México, los servicios de FX los presta Rampa Blockchain, S.A.P.I. de C.V. Rio es una empresa de tecnología, no un banco, y no capta depósitos.</p>
   </section>
@@ -178,7 +179,7 @@
     <p>Precios en firme, liquidados en minutos. USDC y USDT contra MXN, COP y PEN, 24/7.</p>
     <a class="btn" href="../../contact.html">Hablar con Rio</a>
   </aside>
-  <p class="updated">Última actualización: <time datetime="2026-10-01">1 de octubre de 2026</time></p>
+  <p class="updated">Última actualización: <time datetime="2026-10-14">14 de octubre de 2026</time></p>
 
 </article>
 </main>

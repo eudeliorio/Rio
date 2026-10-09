@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
-<link rel="stylesheet" href="../assets/rio.css?v=33" />
+<link rel="stylesheet" href="../assets/rio.css?v=34" />
 <link rel="canonical" href="https://www.rio.trade/blog/mxn-liquidity-by-the-hour">
 <link rel="alternate" hreflang="en" href="https://www.rio.trade/blog/mxn-liquidity-by-the-hour">
 <link rel="alternate" hreflang="es-MX" href="https://www.rio.trade/es/blog/liquidez-del-peso-hora-por-hora">
@@ -19,7 +19,7 @@
 <meta property="og:description" content="The peso trades 24/7 but is not liquid 24/7. One week of peso liquidity on New York time, what happens to spreads after 5pm and on weekends, and how a treasury can plan around it.">
 <meta property="og:url" content="https://www.rio.trade/blog/mxn-liquidity-by-the-hour">
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "Rio", "legalName": "Rampa Holdings Limited", "alternateName": "Rio Trade", "url": "https://www.rio.trade", "logo": "https://www.rio.trade/LOGO-PATH", "description": "Stablecoin FX infrastructure for Latin America. Liquidity, conversion and payout to local rails for institutional clients.", "foundingDate": "CONFIRM", "address": {"@type": "PostalAddress", "addressLocality": "Mexico City", "addressCountry": "MX"}, "areaServed": ["MX", "CO", "PE", "US"], "sameAs": ["https://www.linkedin.com/company/rio-trade", "https://www.ycombinator.com/companies/PATH", "https://docs.rio.trade"]}</script>
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MXN liquidity by the hour: why Friday at 5pm costs more, and what a treasury can do about it", "description": "The peso trades 24/7 but is not liquid 24/7. One week of peso liquidity on New York time, what happens to spreads after 5pm and on weekends, and how a treasury can plan around it.", "inLanguage": "en", "articleSection": "Liquidity", "url": "https://www.rio.trade/blog/mxn-liquidity-by-the-hour", "datePublished": "2026-10-01", "dateModified": "2026-10-01", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Article", "headline": "MXN liquidity by the hour: why Friday at 5pm costs more, and what a treasury can do about it", "description": "The peso trades 24/7 but is not liquid 24/7. One week of peso liquidity on New York time, what happens to spreads after 5pm and on weekends, and how a treasury can plan around it.", "inLanguage": "en", "articleSection": "Liquidity", "url": "https://www.rio.trade/blog/mxn-liquidity-by-the-hour", "datePublished": "2026-10-14", "dateModified": "2026-10-14", "author": {"@type": "Person", "name": "Gabriel Ortiz", "jobTitle": "Head of Growth", "worksFor": {"@type": "Organization", "name": "Rio"}}, "publisher": {"@type": "Organization", "name": "Rio", "url": "https://www.rio.trade"}}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "inLanguage": "en", "mainEntity": [{"@type": "Question", "name": "Does the FX market ever actually close?", "acceptedAnswer": {"@type": "Answer", "text": "The interbank market does. Trading runs continuously from the Sunday evening open in Asia to the Friday evening close in New York, each region handing off to the next. Over the weekend there is effectively no interbank trading and no live USD/MXN price. Desks like Rio keep quoting through it, but the price reflects the risk of holding the position until the market reopens."}}, {"@type": "Question", "name": "Why is the peso cheaper to trade at some hours than others?", "acceptedAnswer": {"@type": "Answer", "text": "Because the cost of converting a currency depends on how many market makers are competing to quote it at that moment. In the New York morning, with London still open, the most desks are active in pesos and the spread is tightest. After the US close, fewer desks quote, each carries more risk, and the price shows it."}}, {"@type": "Question", "name": "What is the worst time of day to trade pesos?", "acceptedAnswer": {"@type": "Answer", "text": "Roughly 5pm to 7pm New York time, after the US close and before Tokyo opens. It is also when surprise news moves the price most, because there are fewer players to absorb it. For a currency as tied to the dollar as the peso, the US close matters more than it does for a pair with a deep Asian market."}}, {"@type": "Question", "name": "Can I avoid weekend and holiday pricing entirely?", "acceptedAnswer": {"@type": "Answer", "text": "Often. If the weekend payout is predictable, lock the rate with a forward during the liquid window for value on the weekend. If the dollars will not arrive until Monday, use an overdraft to fund the payout on Friday and settle up to three days later. If the flow is continuous, work it through the liquid window with a TWAP. Holidays in Mexico or the US behave like weekends for pricing. What you cannot avoid is an unplanned Saturday conversion, and for that the only protection is a provider that shows you the weekend price before you accept it."}}, {"@type": "Question", "name": "Does SPEI run on weekends?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. SPEI operates 24 hours a day, every day, with scheduled maintenance windows that Banco de México announces in advance. Pesos sent over SPEI on a Saturday credit in seconds. The limit on weekend FX is the price of the conversion, not the rail."}}]}</script>
 </head>
 <body>
@@ -55,11 +55,12 @@
   <div class="container">
     <div class="eyebrow rv"><span class="idx">03 / 04</span> MXN corridor series</div>
     <h1 class="rv d1">MXN liquidity by the hour: why Friday at 5pm costs more, and what a treasury can do about it</h1>
+    <p class="answer rv d2">USD/MXN is most liquid in the New York morning and thinnest from 5pm to 7pm New York time and over the weekend, when the interbank market is closed. Converting in those hours costs more with any provider. With Rio, the wider spread shows in the quote before you trade, and pesos still settle over SPEI in one to two minutes.</p>
     <p class="sub rv d2">You can trade the peso at any hour. You cannot trade it well at any hour. The gap between those two sentences is a cost most treasuries pay every week without seeing it.</p>
     <div class="post-meta rv d3">
       <div class="byline">
         <div class="avatar" aria-hidden="true">GO</div>
-        <div><span class="name">Gabriel Ortiz</span>, Head of Growth at Rio<br>Liquidity, <time datetime="2026-10-01">October 1, 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">6 min read</span></div>
+        <div><span class="name">Gabriel Ortiz</span>, Head of Growth at Rio<br>Liquidity, <time datetime="2026-10-14">October 14, 2026</time><span style="margin-left:10px; font-family: var(--mono); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;">6 min read</span></div>
       </div>
       <div class="post-tools">
         <span class="lang-toggle" role="group" aria-label="Language / Idioma"><a href="mxn-liquidity-by-the-hour.html" hreflang="en" lang="en" aria-current="true">EN</a><a href="es/liquidez-del-peso-hora-por-hora.html" hreflang="es-MX" lang="es">ES</a></span>
@@ -76,7 +77,7 @@
     <p class="small">The rail that moves pesos, SPEI, never closes either. So the demand for pesos on a Saturday is real. The supply of pesos at a fair price on a Saturday is not. If any part of your flow into or out of Mexico trades outside US working hours, this is about what that costs, and how to stop paying it.</p>
   </section>
 
-  <h2>A week in peso liquidity</h2>
+  <h2>Why is the peso not equally liquid at every hour?</h2>
   <p>FX has no closing bell, but liquidity is not about the clock. It is about who is at their desk. The peso is a dollar market: 98% of it trades against USD, 82% of it outside Mexico, mostly in New York and London. Follow one week, New York time.</p>
   <!-- Diagram slot: inline rio-blog-03-liquidity-clock.svg here. Same content in the list below. -->
   <section class="week" aria-label="One week of peso liquidity, New York time">
@@ -90,16 +91,16 @@
   </section>
   <p>None of this is special to Mexico. What is special to Mexico is the peso rail underneath it. <a href="spei-vs-spid-mexico-rails.html">SPEI runs 24 hours a day and settles in seconds</a>, so the payment side of your business never stops. Only the pricing side does.</p>
 
-  <h2>What thin hours cost</h2>
+  <h2>How much it costs to trade pesos off-hours</h2>
   <p><strong>A wider spread.</strong> Market makers price liquidity by risk. Fewer players to take the other side, harder to hedge, so the spread opens to compensate. The same USD 2 million ticket that clears tight at 10am Tuesday clears wider at 6pm Friday.</p>
   <p><strong>A worse chance of getting filled.</strong> In thin markets the price you see and the price you get drift apart more often. On venues with last look, the practice of rejecting a trade after you accepted it, rejections rise with volatility, and volatility rises when depth falls. So the trade you most need done is the one most likely to be bounced and re-quoted worse.</p>
   <p><strong>A calendar you did not choose.</strong> Treasuries that understand the first two start batching conversions into the liquid window. Reasonable, except that now the market sets the payment schedule instead of the business. A remittance company should not have to think about New York hours to decide when to fund Saturday payouts.</p>
 
-  <h2>Where the weekend price comes from</h2>
+  <h2>Where does the dollar-peso rate come from on weekends?</h2>
   <p>A provider that quotes on Saturday is not being generous or greedy. It is carrying rate risk for you for up to two days and charging for it. That risk is real and it belongs in the price.</p>
   <p>The honest way to handle it is not to pretend the Saturday price is the Tuesday price. It is to show the weekend price as what it is, before you trade, so you can decide whether the payout has to go now or can wait for the Sunday open.</p>
 
-  <h2>How Rio prices and settles around the clock</h2>
+  <h2>How Rio quotes and settles pesos 24/7, including weekends and holidays</h2>
   <!-- GATE G1: desk sign-off — the piece says spreads are wider off-hours, never how much. GATE G2: confirm weekend and MX/US holiday quoting and settlement. -->
   <p>Rio quotes and settles USDC and USDT against MXN 24 hours a day, seven days a week, including Mexican and US holidays. Three things about how that works.</p>
   <p><strong>The quote tells you what time it is.</strong> Every quote is an all-in price against the live market rate, firm for the full amount for about ten seconds, with the spread shown separately. Off-hours and on weekends that spread is wider, because the market is thinner, and you see it in the quote before you accept, not on the statement after. No last look, so a quote you accept is a trade that executes.</p>
@@ -107,7 +108,7 @@
   <p><strong>You can skip the thin hours entirely.</strong> If you know on Friday morning what you will pay out on Saturday, lock the rate with a forward for value on Saturday. If your inflows are large and continuous, work them through the liquid window with a TWAP instead of crossing a lump at 6pm. If you need to pay out before your dollars arrive, Rio's overdraft lets you fund the payout in the liquid window and settle your side up to three days later.</p>
   <p>One more. When Rio's own clients have flow in both directions, one selling pesos while another buys, the desk can match them and quote well inside the market spread for that moment. Those axe alerts are worth most exactly when the outside market is thinnest.</p>
 
-  <h2>The question to ask your current provider</h2>
+  <h2>What to ask your FX provider about off-hours spreads</h2>
   <p>Not "what is your spread." Ask: "what was my spread at 6pm last Friday?" If the answer is the same number as Tuesday at 10am, one of two things is true. Either the provider is eating the off-hours cost, which will not last, or the Tuesday number was never as tight as it looked. <a href="real-cost-of-mxn-fx.html">Piece 02 in this series</a> shows how to measure it yourself.</p>
 
   <section class="faq" aria-labelledby="faq">
@@ -124,8 +125,8 @@
     <p>Yes. SPEI operates 24 hours a day, every day, with scheduled maintenance windows that Banco de México announces in advance. Pesos sent over SPEI on a Saturday credit in seconds. The limit on weekend FX is the price of the conversion, not the rail.</p>
   </section>
   <section class="about" aria-labelledby="about">
-    <h2 id="about">About Rio</h2>
-    <p>Rio is stablecoin FX infrastructure for Latin America. It provides liquidity, conversion and payout to local rails in Mexico, Colombia and Peru for fintechs and enterprises, with all-in pricing against the market rate, firm quotes for the full amount and settlement in minutes. Rio runs more than USD 8 billion in annualized volume.</p>
+    <h2 id="about">What is Rio?</h2>
+    <p>Rio is stablecoin FX infrastructure for Latin America. It provides liquidity, conversion and payout to local rails in Mexico, Colombia and Peru for fintechs and enterprises, with all-in pricing against the market rate, firm quotes for the full amount and settlement in minutes. Rio is on track for a USD 12 billion annual run rate.</p>
     <!-- GATE: legal paragraph pending Luis -->
     <p class="legal">In Mexico, FX services are provided by Rampa Blockchain, S.A.P.I. de C.V. Rio is a technology company, not a bank, and does not take deposits.</p>
   </section>
@@ -140,7 +141,7 @@
     <p>Firm prices, settled in minutes. USDC and USDT against MXN, COP and PEN, 24/7.</p>
     <a class="btn" href="../contact.html">Talk to Rio</a>
   </aside>
-  <p class="updated">Last updated: <time datetime="2026-10-01">October 1, 2026</time></p>
+  <p class="updated">Last updated: <time datetime="2026-10-14">October 14, 2026</time></p>
 
 </article>
 </main>
